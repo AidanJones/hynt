@@ -1,5 +1,24 @@
 # Payload and scrub performance — 15 November 2026
 
+## Hardware profiling and update reduction
+
+The software-only result below was not representative of the available GPU. Chromium was explicitly run with its Direct3D11 backend and the renderer was verified as **Intel UHD Graphics (0x00009B41)** on Windows 11 build 26200, driver 31.0.101.2137, Chromium 159.0.8154.6. All benchmark cases assert that actual polity polygons render.
+
+| Case | Viewport | Mean FPS | 95th percentile frame | Input work / update |
+| --- | --- | ---: | ---: | ---: |
+| 117 CE, before | 1440×1000 | 60.31 | 18.30 ms | 1.58 ms |
+| 117 CE, after | 1440×1000 | 59.99 | 18.90 ms | 1.56 ms |
+| 1920 CE, after | 1440×1000 | 59.99 | 18.40 ms | 1.90 ms |
+| 117 CE, phone-size viewport | 390×844 | 59.96 | 19.00 ms | 1.35 ms |
+
+These are short 120-update, within-era observations. The hardware renderer already sustained approximately 60 FPS before optimization; the change reduces redundant work rather than claiming that code alone turned 9 FPS into 60. The original 117 CE test made 360 filter, 360 visibility and 120 paint-property calls; the optimized equivalent makes 24 filter calls and no redundant visibility/opacity calls. Its active features are unchanged, proven across date boundaries in tests.
+
+Compressed era buffers now decode in a dedicated module worker, keeping decompression/JSON parsing off the main UI thread. HTTP download sizes remain observable in the main page. Worker errors reject the correct request, retry is supported, and a failed worker falls back to the compatible main-thread decoder. Rapid-scrub tests confirm that delayed old-era responses cannot replace a newer selection. A corrupt gzip body delivered with HTTP 200 was also recovered through Retry. A stale failed request cannot delete a newer cache entry for the same era.
+
+Initial resource bodies in the measured default view were **1,508,817 bytes**; the 1920 view was **3,451,659 bytes** (plus document/headers). Packed source geometry was not simplified further. Six restored BCE boundary records bring the polity total to 13,412 and packed era files to 10,912,031 bytes. The whole atlas remains below 15 MB.
+
+**Limits:** this verifies approximately 60 FPS on the named desktop GPU for the measured cases. The small viewport uses the same desktop GPU and is not a physical-phone certification. Network-limited and more extensive cross-era performance, iOS/Android devices and other GPUs still need measurement. Raw results are retained in `benchmarks/performance-2026-11-15.json`. The following sections retain the earlier packaging and software-renderer baseline; their counts and limitations are superseded here where they differ.
+
 ## Shipped bytes
 
 - The 17 era files went from **68,297,906 bytes to 10,911,192 bytes** (84% smaller).

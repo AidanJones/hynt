@@ -1,5 +1,13 @@
 # Technology and knowledge layer
 
+## Coverage expansion
+
+The selection now has **six packages, 23 attestations and 19 source references**. Writing and paper join farming, ironworking, algebra and printing. Added records cover New Guinea cultivation, Mexican maize/squash, Uruk records, Shang inscriptions, Welsh iron objects, Meroe production, Brahmagupta's work at Bhinmal, Cai Lun's traditional report and an Egyptian paper object. These add regional evidence, not new unsupported transmission arrows.
+
+Additional editable records live in `pipeline/curated/technology-expansion.json`; the pipeline merges that file with the initial compilation and rejects duplicate IDs. BP-dated records retain their original calibrated ranges and use a fixed 1950 CE epoch. The civil-year conversion explicitly skips year zero; the original BP labels remain visible.
+
+The earlier starting-selection notes below are retained for context; the expansion supersedes their counts and the gaps it fills. The layer is still a small selection, with particularly sparse coverage of South America, much of Africa and many independent mathematical traditions.
+
 Added 15 November 2026. The original curated compilation is in `pipeline/curated/technologies.json`; run `python -m pipeline.technologies` to validate and package it independently of the polity rebuild. The full build runs this step too.
 
 - Four selectable packages: farming/herding, ironworking, algebra and movable-type printing.

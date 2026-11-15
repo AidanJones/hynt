@@ -2,7 +2,7 @@
 
 Hynt (Welsh: the course, the way taken) maps changing claimed or controlled territory, with sources attached to every shape.
 
-The viewer includes Cliopatria polities, technology/knowledge evidence, and a Britain/Wales evidence layer. The original build spec remains the product brief; [SPEC_REVIEW.md](SPEC_REVIEW.md) records corrections and implementation decisions. Later milestones are tracked in Beads.
+The viewer includes Cliopatria polities, technology/knowledge evidence, Britain/Wales evidence, and migration/site stories. The original build spec remains the product brief; [SPEC_REVIEW.md](SPEC_REVIEW.md) records corrections and implementation decisions. Later milestones are tracked in Beads.
 
 ## Run locally
 
@@ -14,13 +14,15 @@ python -m http.server 8000 --bind 127.0.0.1 --directory atlas
 
 Open http://127.0.0.1:8000 in a browser with WebGL 2 and the standard gzip `DecompressionStream` API (current major browsers). Serve over HTTP; opening `index.html` as a file does not support modules and data fetching.
 
-The viewer supports 10,000 BCE–2026 CE, annual stepping with no year zero, playback, polity visibility/opacity, sourced details, entity search, region presets and URL state. Polity coverage remains 3400 BCE–2024 CE and is not extrapolated.
+The viewer supports 300,000 BP–2026 CE with a piecewise slider: 1,000-year prehistoric steps to 12,000 BP, then 50-year steps to 3400 BCE, then annual steps. There is no civil year zero. `BP` means before 1950 CE; `ya` means before the atlas's fixed 2026 endpoint. Precise BCE/CE and BP input, playback, sourced details, search, regions and shareable state are supported. Polity coverage remains 3400 BCE–2024 CE and is not extrapolated.
 
-Enable **Technologies & knowledge**, choose farming/herding, ironworking, algebra or printing, and open **Explore dated milestones** to jump between evidence records. Each marker lists the package's locally evidenced components and citations. Hollow markers show a dating window; dashed connections are schematic and individually sourced. Past markers represent recorded evidence, not continuous use or universal adoption. Example: `http://127.0.0.1:8000/#y=1145&l=polity,technology&t=algebra&c=20,35,2`. See [technology-report.md](technology-report.md) for coverage and [PRE_ROMAN_BRITAIN.md](PRE_ROMAN_BRITAIN.md) for the Wales/Britain investigation.
+Enable **Technologies & knowledge**, choose farming/herding, ironworking, algebra, printing, writing or paper, and open **Explore dated milestones** to jump between evidence records. Each marker lists the package's locally evidenced components and citations. Hollow markers show a dating window; dashed connections are schematic and individually sourced. Past markers represent recorded evidence, not continuous use or universal adoption. Example: `http://127.0.0.1:8000/#y=1145&l=polity,technology&t=algebra&c=20,35,2`. See [technology-report.md](technology-report.md) for coverage and [PRE_ROMAN_BRITAIN.md](PRE_ROMAN_BRITAIN.md) for the Wales/Britain investigation.
 
 Enable **Britain & Wales evidence**, expand its explorer, and choose **Explore Wales · 700 BCE**. Browse archaeological sites, metalwork, communities and named rulers, or search for Caratacus, Tasciovanus or Llyn Fawr. **Recorded by this year** keeps earlier evidence; **Dating overlaps this year** uses the actual cited interval. Points are approximate evidence anchors, not kingdoms or tribal boundaries. Example: `http://127.0.0.1:8000/#y=51&l=britain&bk=ruler&bm=window&c=-3,52,5`.
 
 ## Rebuild data
+
+Enable **Migrations & early presence** and use **Begin at 100,000 BP** to explore two schematic dispersal models and three dated-presence stories. Source caveats distinguish routes, site evidence, calibrated dates and approximate age estimates. See [migrations-report.md](migrations-report.md). [audit-report.md](audit-report.md) documents regional coverage, identity/overlap flags and date decisions.
 
 Python 3.12+:
 
@@ -34,20 +36,27 @@ The first build fetches a pinned archive to ignored `pipeline/raw/`. Use `--offl
 
 Outputs include packed era files, a manifest, citations, an entity index, [build-report.md](build-report.md) and [pipeline/quarantine.json](pipeline/quarantine.json). Invalid source dates are quarantined without guessing; other validation failures stop the build. Geography is simplified for overview use, not precise boundary analysis. Packaging then deduplicates exact geometry, delta-encodes coordinates with exact exceptions and gzips the result. Every chunk must reproduce all validated coordinates and properties exactly. The viewer reconstructs standard GeoJSON before passing it to MapLibre. See [performance-report.md](performance-report.md).
 
-Technology data is edited in `pipeline/curated/technologies.json`. Rebuild just that small layer with `python -m pipeline.technologies`; its schema checks require valid dates, source references, coordinates and chronological connection endpoints. The full pipeline includes this step.
+Technology data is edited in `pipeline/curated/technologies.json` and `technology-expansion.json`. Rebuild with `python -m pipeline.technologies`; validation requires dates, citations, coordinates, BP epoch consistency and chronological connections. There are six packages and 23 attestations, including writing and paper. The full pipeline includes this step.
 
 British evidence is edited in `pipeline/curated/britain.json`; rebuild with `python -m pipeline.britain`. The full pipeline includes both curated layers. `python -m pipeline.package` converts a legacy manifest/GeoJSON export to the packed format; it is also part of the full build. To inspect a packed chunk in Python, use `pipeline.package.read_collection(path)`.
 
 ## Checks
 
+`python -m pipeline.migrations` validates and packages migration/site stories. `python -m pipeline.audit` regenerates the coverage/overlap report and viewer interpretation notes from current packed data. Both are part of the full rebuild. Six source records with inclusive zero endpoints are now represented without changing membership over valid civil years; original values and the explicit conversion rule are in `pipeline/date-decisions.json`.
+
 ```powershell
-node --test tests/timeline.test.js tests/technology.test.js tests/britain.test.js tests/codec.test.js
+node --test tests/*.test.js
 ./.venv/Scripts/python.exe -m pytest tests -q
 ./.venv/Scripts/python.exe -m playwright install chromium
 # Start the HTTP server above in another terminal, then:
 ./.venv/Scripts/python.exe tests/browser_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/deep_time_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/audit_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/cross_era_smoke.py http://127.0.0.1:8000
 # Run separately from other browser tests:
 ./.venv/Scripts/python.exe tests/browser_performance.py http://127.0.0.1:8000
+# Windows Direct3D test; inspect the reported renderer, not just this flag:
+./.venv/Scripts/python.exe tests/browser_performance.py http://127.0.0.1:8000 desktop --hardware
 ```
 
 The browser script exercises five dates, rendered polygons, citations, actual map clicks, BCE/CE stepping, layer/hash persistence, playback, mobile layout and a failed-download retry. Screenshots and measurements go to ignored `test-results/`. [verification.md](verification.md) records the latest run and its limits.

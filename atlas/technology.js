@@ -16,6 +16,8 @@ const drawings = {
   iron: '<path d="m5 21 9-12m-4-5 4-2 7 6-4 4-7-6Z"/>',
   algebra: '<path d="m4 9 8 10m0-10L4 19m12-13c0-4 6-4 6 0 0 2-6 5-6 7h6"/>',
   printing: '<path d="M5 3h14v5H5Zm0 13h14v6H5ZM5 18H2V9h20v9h-3M6 12h1m2 7h6"/>',
+  writing: '<path d="m4 18 1-5L16 2l5 5-11 11-6 1Zm2-5 4 4M3 22h18"/>',
+  paper: '<path d="M5 2h10l5 5v15H5Zm10 0v6h5M8 12h9M8 16h9"/>',
 };
 export function icon(packageID) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');

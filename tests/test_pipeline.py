@@ -29,7 +29,7 @@ def test_inclusive_source_endpoints_survive(start, end):
     assert not p['from'] <= next_year(end) < p['to']
 
 
-@pytest.mark.parametrize(('start', 'end'), [(0, 1), (-1, 0), (5, 4)])
+@pytest.mark.parametrize(('start', 'end'), [(0, 1), (0, 0), (5, 4)])
 def test_ambiguous_dates_are_rejected(start, end):
     with pytest.raises(ValueError):
         normalize(source_feature(start, end), 0)
@@ -40,6 +40,14 @@ def test_missing_citation_fails_validation():
     f['properties']['sources'] = []
     with pytest.raises(AssertionError):
         validate_feature(f, {})
+
+def test_zero_end_boundary_preserves_every_valid_civil_year_without_guessing():
+    f=normalize(source_feature(-14,0),0)
+    p=f['properties'];validate_feature(f,{'cliopatria':{}})
+    assert p['source_to']==0 and p['display_to']==-1 and p['to']==1
+    for year in range(-100,20):
+        if year==0:continue
+        assert (-14<=year<=0)==(p['from']<=year<p['to'])
 
 
 def test_manifest_has_continuous_half_open_coverage():

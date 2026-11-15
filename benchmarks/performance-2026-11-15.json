@@ -1,0 +1,150 @@
+{
+  "observations": [
+    {
+      "label": "before",
+      "environment": {
+        "os": "Windows-11-10.0.26200-SP0",
+        "browser": "159.0.8154.6",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "viewport": [
+          1440,
+          1000
+        ]
+      },
+      "initial_resource_bytes": 1503975,
+      "scrub": {
+        "frames": 119,
+        "mean_frame_ms": 110.41512605021981,
+        "p95_frame_ms": 117.5,
+        "observed_fps": 9.056730139901056,
+        "mean_input_cpu_ms": 1.6183333327372869,
+        "operations": {
+          "setFilter": 360,
+          "setLayoutProperty": 360,
+          "setPaintProperty": 120
+        },
+        "stable_technology_marker": true
+      },
+      "limits": "Loopback benchmark within one loaded era, 120 UI updates. Does not certify network, physical GPU, cross-era loads, mobile or 60fps on user devices."
+    },
+    {
+      "label": "hardware-before",
+      "environment": {
+        "os": "Windows-11-10.0.26200-SP0",
+        "browser": "159.0.8154.6",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "requested_hardware": true,
+        "viewport": [
+          1440,
+          1000
+        ]
+      },
+      "initial_resource_bytes": 1503975,
+      "scrub": {
+        "frames": 119,
+        "mean_frame_ms": 16.580672268106156,
+        "p95_frame_ms": 18.299999952316284,
+        "observed_fps": 60.31118544713989,
+        "mean_input_cpu_ms": 1.5791666626930236,
+        "operations": {
+          "setFilter": 360,
+          "setLayoutProperty": 360,
+          "setPaintProperty": 120
+        },
+        "stable_technology_marker": true
+      },
+      "limits": "Loopback benchmark within one loaded era, 120 UI updates. Does not certify network, physical GPU, cross-era loads, mobile or 60fps on user devices."
+    },
+    {
+      "label": "hardware-after",
+      "environment": {
+        "os": "Windows-11-10.0.26200-SP0",
+        "browser": "159.0.8154.6",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "requested_hardware": true,
+        "viewport": [
+          1440,
+          1000
+        ]
+      },
+      "initial_resource_bytes": 1508817,
+      "scrub": {
+        "frames": 119,
+        "mean_frame_ms": 16.668907563225563,
+        "p95_frame_ms": 18.899999976158142,
+        "observed_fps": 59.99193385691151,
+        "mean_input_cpu_ms": 1.561666672428449,
+        "operations": {
+          "setFilter": 24,
+          "setLayoutProperty": 0,
+          "setPaintProperty": 0
+        },
+        "stable_technology_marker": true
+      },
+      "limits": "Loopback benchmark within one loaded era, 120 UI updates with rendered polygons. Renderer is reported explicitly; does not certify networks, cross-era loads, phones or universal 60fps."
+    },
+    {
+      "label": "modern-after",
+      "year": 1920,
+      "span_years": 30,
+      "environment": {
+        "os": "Windows-11-10.0.26200-SP0",
+        "browser": "159.0.8154.6",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "requested_hardware": true,
+        "viewport": [
+          1440,
+          1000
+        ],
+        "mobile_viewport_only": false
+      },
+      "initial_resource_bytes": 3451659,
+      "scrub": {
+        "frames": 119,
+        "mean_frame_ms": 16.669747898558608,
+        "p95_frame_ms": 18.399999976158142,
+        "observed_fps": 59.988909615511794,
+        "mean_input_cpu_ms": 1.8991666644811631,
+        "operations": {
+          "setFilter": 261,
+          "setLayoutProperty": 0,
+          "setPaintProperty": 0
+        },
+        "stable_technology_marker": true
+      },
+      "limits": "Loopback benchmark within one loaded era, 120 UI updates with rendered polygons. Renderer is reported explicitly; does not certify networks, cross-era loads, phones or universal 60fps."
+    },
+    {
+      "label": "mobile-viewport-after",
+      "year": 117,
+      "span_years": 80,
+      "environment": {
+        "os": "Windows-11-10.0.26200-SP0",
+        "browser": "159.0.8154.6",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "requested_hardware": true,
+        "viewport": [
+          390,
+          844
+        ],
+        "mobile_viewport_only": true
+      },
+      "initial_resource_bytes": 1508817,
+      "scrub": {
+        "frames": 119,
+        "mean_frame_ms": 16.678991596237953,
+        "p95_frame_ms": 19,
+        "observed_fps": 59.95566304053754,
+        "mean_input_cpu_ms": 1.3491666654745738,
+        "operations": {
+          "setFilter": 24,
+          "setLayoutProperty": 0,
+          "setPaintProperty": 0
+        },
+        "stable_technology_marker": true
+      },
+      "limits": "Loopback benchmark within one loaded era, 120 UI updates with rendered polygons. Renderer is reported explicitly; does not certify networks, cross-era loads, phones or universal 60fps."
+    }
+  ],
+  "notes": "Runs were isolated. Phone-size viewport is not a physical phone. Actual WebGL renderer is recorded. All final after cases assert visible polity geometry."
+}

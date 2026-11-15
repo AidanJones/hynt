@@ -2,8 +2,18 @@
 import json
 import math
 from pathlib import Path
+from pipeline.chronology import bp_to_civil
 
 ROOT = Path(__file__).resolve().parents[1]
+
+def load_curated():
+    data = json.loads((ROOT / 'pipeline/curated/technologies.json').read_text(encoding='utf-8'))
+    extension = json.loads((ROOT / 'pipeline/curated/technology-expansion.json').read_text(encoding='utf-8'))
+    for key in ['packages','attestations','transmissions']:
+        data[key].extend(extension[key])
+    assert not data['sources'].keys() & extension['sources'].keys(), 'Duplicate source IDs'
+    data['sources'].update(extension['sources'])
+    return data
 
 
 def validate(data):
@@ -21,6 +31,11 @@ def validate(data):
         assert -180 <= a['coordinates'][0] <= 180 and -90 <= a['coordinates'][1] <= 90
         assert a['location_note'] and a['summary'] and a['evidence'] and a['date_label']
         assert a['sources'] and all(s in data['sources'] for s in a['sources'])
+        if 'source_date' in a:
+            date = a['source_date']
+            assert date['system'] == 'cal BP'
+            assert a['date_from'] == bp_to_civil(date['oldest'])
+            assert a['date_to'] == bp_to_civil(date['youngest'])
     seen = set()
     for edge in data['transmissions']:
         assert edge['id'] not in seen
@@ -36,7 +51,7 @@ def validate(data):
 
 
 def main():
-    data = validate(json.loads((ROOT / 'pipeline/curated/technologies.json').read_text(encoding='utf-8')))
+    data = validate(load_curated())
     (ROOT / 'atlas/data/technologies.json').write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print(f"Packaged {len(data['packages'])} technology packages, {len(data['attestations'])} attestations, {len(data['transmissions'])} evidenced links")
 

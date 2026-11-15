@@ -7,11 +7,17 @@ const data = JSON.parse(readFileSync(new URL('../atlas/data/technologies.json', 
 test('evidence accumulates without leaking future attestations', () => {
   assert.equal(visibleAttestations(data, -10000).length, 0);
   assert.equal(visibleAttestations(data, -9000, 'farming').length, 1);
-  assert.equal(visibleAttestations(data, 819, 'algebra').length, 0);
-  assert.equal(visibleAttestations(data, 825, 'algebra').length, 1);
-  assert.equal(visibleAttestations(data, 1145, 'algebra').length, 2);
+  assert.equal(visibleAttestations(data, 819, 'algebra').length, 1);
+  assert.equal(visibleAttestations(data, 825, 'algebra').length, 2);
+  assert.equal(visibleAttestations(data, 1145, 'algebra').length, 3);
   assert.equal(visibleAttestations(data, 2026, 'algebra', 'window').length, 0);
   assert.equal(visibleAttestations(data, 825, 'algebra', 'window').length, 1);
+});
+test('expanded evidence reaches multiple independent traditions without inferred transfer links',()=>{
+  assert.ok(visibleAttestations(data,-1200,'writing').some(a=>a.id==='writing-anyang'));
+  assert.ok(visibleAttestations(data,-600,'iron').some(a=>a.id==='iron-meroe'));
+  assert.ok(visibleAttestations(data,105,'paper').some(a=>a.id==='paper-china-report'));
+  assert.ok(!data.transmissions.some(t=>t.origin==='writing-uruk'&&t.destination==='writing-anyang'));
 });
 test('connections appear only when both endpoints and destination date are attested', () => {
   const before = visibleAttestations(data, 1144, 'algebra');

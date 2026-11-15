@@ -4,6 +4,8 @@ Application code: repository MIT licence. Data licences are separate.
 
 ## Distributed
 
+- **Migration/site stories:** original summaries and schematic geometry are CC0. Linked scholarly publications retain their rights. No published migration maps, photographs or genome records are copied. `migrations-report.md` records the distinction between route models and dated site evidence.
+
 - **Britain/Wales evidence compilation:** original factual summaries, references, date explanations and illustrative anchors are CC0-1.0. Cadw, museum, university and Coflein publications retain their own rights. No source images, maps, bulk exports or quoted descriptions are included. The compilation does not inherit a bulk dataset licence from the sources it links.
 
 - **Technology evidence compilation:** original factual summaries, package definitions, illustrative coordinate anchors and schematic connections are dedicated under CC0-1.0. Institutional publications linked in `technologies.json` retain their own rights. No article text, museum images or bulk catalogue exports are included; citations and original paraphrases accompany the markers. Curation is not a claim that linked sites have an open redistribution licence.

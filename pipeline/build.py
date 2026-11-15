@@ -57,7 +57,7 @@ def polygonal(geometry):
 def normalize(feature, index):
     p = feature['properties']
     start, end = int(p['FromYear']), int(p['ToYear'])
-    if start == 0 or end == 0 or start > end:
+    if start == 0 or start > end:
         raise ValueError(f'Invalid source years in record {index}')
     qid = str(p.get('Wikidata', '')).strip()
     qid = qid if re.fullmatch(r'Q\d+', qid) else ''
@@ -74,10 +74,13 @@ def normalize(feature, index):
         raise ValueError(f'Invalid packaged geometry {index}')
     props = dict(id=f'polity:cliopatria:{index:05d}', entity=entity, name=p['Name'],
                  layer='polity', kind='polity', confidence='unknown',
-                 **{'from': start, 'to': next_year(end)}, sources=['cliopatria'],
+                 **{'from': start, 'to': next_year(-1 if end == 0 else end)}, sources=['cliopatria'],
                  wikidata=qid, wikipedia=p.get('Wikipedia', ''),
                  area_km2=round(float(p['Area']), 2), source_record=index,
                  source_from=start, source_to=end)
+    if end == 0:
+        props['display_to'] = -1
+        props['date_note'] = 'The upstream inclusive endpoint is 0. Over the viewer’s valid civil years (no year zero), this covers years through 1 BCE and excludes 1 CE. The original endpoint is retained; no historical date is inferred.'
     return {'type': 'Feature', 'id': props['id'], 'properties': props, 'geometry': mapping(final)}
 
 
@@ -96,11 +99,13 @@ def validate_feature(feature, sources):
 def main():
     from pipeline.technologies import main as build_technologies
     from pipeline.britain import main as build_britain
+    from pipeline.migrations import main as build_migrations
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--offline', action='store_true', help='Require cached input, do not fetch')
     args = parser.parse_args()
     build_technologies()
     build_britain()
+    build_migrations()
     archive = RAW / 'cliopatria.geojson.zip'
     if not args.offline:
         fetch(BASE + archive.name, archive)
@@ -120,16 +125,20 @@ def main():
         'sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
         'type': 'dataset', 'citation': 'Cliopatria, Seshat Global History Databank, pinned Git revision ' + REVISION,
         'changes': 'Inclusive dates converted to half-open civil-year intervals; geometries repaired, simplified at 0.035 degrees and rounded to 4 decimals. Original area retained. Confidence not supplied.'}}
-    features, excluded, quarantined = [], Counter(), []
+    features, excluded, quarantined, date_decisions = [], Counter(), [], []
     for index, feature in enumerate(original['features']):
         if feature['properties']['Type'] != 'POLITY':
             excluded[feature['properties']['Type']] += 1
             continue
         p = feature['properties']
-        if p['FromYear'] == 0 or p['ToYear'] == 0 or p['FromYear'] > p['ToYear']:
+        if p['FromYear'] == 0 or p['FromYear'] > p['ToYear']:
             quarantined.append({'source_record': index, 'reason': 'Invalid or ambiguous civil-year range', 'properties': p})
             continue
         features.append(normalize(feature, index))
+        if p['ToYear'] == 0:
+            date_decisions.append({'source_record':index,'original_properties':p,
+                'normalised_exclusive_end':1,'display_end':-1,
+                'reason':'For every valid civil year y != 0, from <= y <= 0 is equivalent to from <= y < 1. This preserves source query membership without inferring a date or changing the raw endpoint.'})
         if index % 1000 == 0:
             print(f'Normalized {index} source records', flush=True)
     for feature in features:
@@ -149,6 +158,7 @@ def main():
         chunks.append({'from': start, 'to': end, 'url': relative, 'features': len(selected), 'bytes': (OUT / relative).stat().st_size})
     write(OUT / 'sources.json', sources)
     write(ROOT / 'pipeline' / 'quarantine.json', quarantined)
+    write(ROOT / 'pipeline' / 'date-decisions.json', date_decisions)
     write(OUT / 'entities.json', sorted(entities.values(), key=lambda x: x['name']))
     write(OUT / 'manifest.json', {'schema_version': 1, 'minimum_year': -3400, 'maximum_year': 2026,
                                 'coverage_to': max(f['properties']['source_to'] for f in features),
@@ -170,6 +180,7 @@ Separate curated evidence is documented in [technology-report.md](technology-rep
 - {len(original['features'])} input records; {len(features)} polity shapes; {len(entities)} entity keys.
 - Excluded non-polity record types: {dict(excluded)}.
 - Quarantined {len(quarantined)} records with ambiguous year-zero or reversed ranges; original fields retained in pipeline/quarantine.json. Dates were not guessed.
+- Restored {len(date_decisions)} zero-endpoint records by preserving membership over valid civil years; raw fields and the equivalence rule are in pipeline/date-decisions.json. No year zero is exposed.
 - All distributed shapes passed date, provenance, finite-coordinate and valid polygon checks.
 - {sum(c['bytes'] for c in chunks)/1_000_000:.2f} MB shipped across gzip era files; exact geometries deduplicated within chunks. Boundary-spanning shapes are duplicated between chunks.
 - Simplification: 0.035 angular degrees, per-feature topology preserved; this is not a globally constant distance or shared-border topology guarantee. Coordinates rounded to four decimals and repaired. Source area is retained, not recomputed from simplified shapes.
@@ -195,6 +206,8 @@ Separate curated evidence is documented in [technology-report.md](technology-rep
 - Performance budgets and expert historical acceptance are not certified by data validation. See verification.md for measured checks.
 '''
     (ROOT / 'build-report.md').write_text(report, encoding='utf-8')
+    from pipeline.audit import main as audit_data
+    audit_data()
     print(f'Built {len(features)} features in {len(chunks)} era chunks.', flush=True)
 
 

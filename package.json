@@ -2,5 +2,5 @@
   "name": "hynt-atlas",
   "private": true,
   "type": "module",
-  "scripts": {"test": "node --test tests/timeline.test.js tests/technology.test.js tests/britain.test.js tests/codec.test.js"}
+  "scripts": {"test": "node --test tests/*.test.js"}
 }

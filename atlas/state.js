@@ -12,11 +12,14 @@ export function readState(hash = location.hash) {
     britain: !params.has('l') || params.get('l').split(',').includes('britain'),
     britainKind: ['ruler','site','community','artefact'].includes(params.get('bk')) ? params.get('bk') : 'all',
     britainMode: params.get('bm') === 'window' ? 'window' : 'cumulative',
+    migration: params.has('l') && params.get('l').split(',').includes('migration'),
+    migrationStory: /^[a-z-]{1,60}$/.test(params.get('m') || '') ? params.get('m') : 'all',
     focus: (params.get('f') || '').slice(0, 120),
     camera: validCamera ? camera : [...DEFAULT_CAMERA]};
 }
 export function serializeState(state) {
-  const params = new URLSearchParams({y: state.year, l: [state.polity && 'polity',state.technology && 'technology',state.britain && 'britain'].filter(Boolean).join(',')});
+  const params = new URLSearchParams({y: state.year, l: [state.polity && 'polity',state.technology && 'technology',state.britain && 'britain',state.migration && 'migration'].filter(Boolean).join(',')});
+  if(state.migrationStory && state.migrationStory!=='all')params.set('m',state.migrationStory);
   if (state.britainKind && state.britainKind !== 'all') params.set('bk',state.britainKind);
   if (state.britainMode === 'window') params.set('bm','window');
   if (state.technologyPackage && state.technologyPackage !== 'all') params.set('t',state.technologyPackage);

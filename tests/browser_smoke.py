@@ -86,10 +86,10 @@ with sync_playwright() as p:
     page.locator('#technology-toggle').check()
     page.locator('#technology-package').select_option('algebra')
     go_year(page, 825)
-    assert page.locator('.technology-marker').count() == 1
+    assert page.locator('.technology-marker').count() == 2
     assert page.locator('.technology-marker.uncertain').count() == 1
     go_year(page, 1145)
-    assert page.locator('.technology-marker').count() == 2
+    assert page.locator('.technology-marker').count() == 3
     page.locator('#technology-fit').click()
     page.wait_for_function('!window.atlas.map.isMoving()')
     page.wait_for_function('window.atlas.map.isSourceLoaded("technology-links")')

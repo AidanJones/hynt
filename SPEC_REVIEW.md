@@ -2,6 +2,8 @@
 
 The architecture is a good fit: static ES modules, range-based geometry and a separately reproducible pipeline. Preserve the original specification as the product brief. These decisions amend its implementation contract.
 
+The November audit resolves six source end-year-zero records without assigning a historical year zero: on the valid civil-year domain, an inclusive end of zero has the same membership as an exclusive end of 1 CE. Preserve the original endpoint and show the last included civil year as 1 BCE. This is a query-equivalent normalization, not a guessed new date; see `pipeline/date-decisions.json` and `audit-report.md`. Invalid starts and reversed intervals remain rejected.
+
 ## Corrections needed before importing data
 
 1. **Inclusive source dates.** Cliopatria uses inclusive `FromYear` and `ToYear`. Convert its end to the next civil year before applying `[from, to)`. A one-year record must survive. There is no civil year zero: the successor of −1 is 1. Use a contiguous internal ordinal for slider steps and playback, while storing civil years in data and URLs.

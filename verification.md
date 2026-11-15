@@ -1,5 +1,17 @@
 # First-increment verification
 
+## Technology, deep time, audit and performance — 15 November 2026
+
+**45 Python and 20 Node tests passed.** The sequential Playwright polity/Britain/technology, deep-time and audit suites passed, with desktop/mobile layouts inspected. A separate hardware-browser check passed delayed cross-era responses and recovery from a corrupt gzip download. These results supersede older counts and open-work statements below.
+
+Technology coverage now contains six packages and 23 attestations, including writing, paper, ironworking and algebra. The timeline reaches 300,000 BP, explicitly using the 1950 epoch. Five migration stories distinguish two illustrative routes from three site attestations; they do not invent dated paths between sites. Prehistoric cultural-region polygons remain a separate Beads follow-up.
+
+The source audit covers 13,412 shapes and 1,411 entities, with alias, temporal-overlap and sampled spatial-overlap reports. Six BCE records formerly quarantined for an end year of zero were restored through a conversion proven equivalent for every valid civil-year query; their original dates and explanations are retained. Historical interpretation notes are visible in the atlas. Flags require scholarly review and are not automatic border corrections. See [audit-report.md](audit-report.md).
+
+Hardware profiling verified Intel UHD Graphics through Direct3D11 and approximately 60 FPS in the measured 117 CE, 1920 CE and phone-size viewport cases. Era decoding now runs in a worker; redundant map-property updates are skipped. The 117 CE benchmark reduced filter calls from 360 to 24 over 120 updates. Hardware already reached approximately 60 FPS before these changes, so this is not a claim of a code-only improvement from the older software-renderer result. The static atlas remains below 15 MB. Physical iOS/Android devices, other GPUs and constrained networks still need measurement. See [performance-report.md](performance-report.md) and the retained benchmark JSON.
+
+The complete offline source rebuild and lossless packaging succeeded. Verification was performed locally; the atlas has not been published.
+
 ## Britain/Wales and lossless packaging — 15 November 2026
 
 **35 Python and 11 Node tests passed.** The new checks cover British record dates, evidence filters, old/new URL state, provenance validation, valid related-record references, lossless coordinate exceptions, geometry deduplication, deterministic chunk repacking, browser gzip decoding and actual byte budgets.
