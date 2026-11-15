@@ -18,6 +18,11 @@ with sync_playwright() as p:
     assert 'Reviewed identity correction' in page.locator('#details').inner_text() or 'REVIEWED IDENTITY CORRECTION' in page.locator('#details').inner_text()
     assert page.locator('#details a[href="https://www.wikidata.org/wiki/Q7209"]').count()>=1
     page.locator('#details .close').click()
+    page.locator('#search').fill('Roman Empire');page.locator('#search-results button').filter(has_text='Roman Empire').first.click()
+    page.wait_for_function('!window.atlas.map.isMoving()')
+    assert 'multiple labels share this source identity' in page.locator('#details').inner_text().lower()
+    assert page.locator('#details a[href*="review.html?entity="]').count()==1
+    page.locator('#details .close').click()
     page.locator('#focus-filters>summary').click();page.locator('#draw-box').click();page.keyboard.press('Escape')
     assert page.locator('#draw-box').get_attribute('aria-pressed')=='false'
     page.locator('#year-slider').focus();page.keyboard.press('ArrowRight')

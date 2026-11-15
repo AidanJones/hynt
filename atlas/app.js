@@ -150,7 +150,7 @@ function details(feature, candidates) {
   selectedBritish = null;
   selectedTechnology = null;
   selectedID = feature.properties.id;
-  showDetails(feature, sources, focusEntity, candidates, () => {selectedID = '';},reviewNotes);
+  showDetails(feature, sources, focusEntity, candidates, () => {selectedID = '';},reviewNotes,entities);
 }
 function countActive() {
   const ids=spatialIDs(collection,state.bounds),allowed=ids?new Set(ids):null;
@@ -161,7 +161,7 @@ function countActive() {
   if (state.year < store.manifest.minimum_year) status('Before 3400 BCE: no polity data. Other enabled layers show separate evidence.');
   else if (state.year > store.manifest.coverage_to) status(`No polity data after ${store.manifest.coverage_to}. Borders have not been extrapolated.`);
   else if (!state.polity) status('Polity layer hidden · enable it in map layers.');
-  else if (focused) status(`${focused.name} · ${active.some(f => f.properties.entity === focused.id) ? 'recorded in this year' : 'no shape recorded in this year'}`);
+  else if (focused) status(`${focused.name} · ${active.some(f => f.properties.entity === focused.id) ? 'recorded in this year' : collection?.features.some(f=>f.properties.entity===focused.id&&f.properties.from<=state.year&&state.year<f.properties.to)?'filtered out of this view':'no shape recorded in this year'}`);
   else status(count ? `${count} polities recorded · select a shape to see its sources` : 'No polity records for this year.');
   if (selectedID) {
     const current = active.find(f => f.properties.id === selectedID);
@@ -211,6 +211,7 @@ async function update() {
   }
 }
 function fitEntity(id) {
+  state.bounds=null;
   religionLayer?.clear();
   eventLayer?.clear();
   technologyRegions?.clear();
@@ -235,7 +236,7 @@ $('#search').addEventListener('input', () => {
   $('#search').setAttribute('aria-expanded', String(!!query));
   if (!query) return;
   const exactName = name => name.toLocaleLowerCase().replace(/^\(|\)$/g,'').trim() === query;
-  const matches = entities.filter(e => e.name.toLocaleLowerCase().includes(query))
+  const matches = entities.filter(e => [e.name,...(e.aliases||[])].some(name=>name.toLocaleLowerCase().includes(query)))
     .sort((a,b)=>Number(exactName(b.name))-Number(exactName(a.name))||a.name.localeCompare(b.name)).slice(0, 15);
   const evidenceMatches = britain?.data.records.filter(r => `${r.name} ${r.place}`.toLocaleLowerCase().includes(query)) || [];
   for (const record of evidenceMatches.slice(0,8)) {

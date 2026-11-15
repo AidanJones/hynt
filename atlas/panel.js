@@ -14,7 +14,7 @@ export function link(text, url) {
   } catch {return element('span', text);}
   return a;
 }
-export function showDetails(feature, sources, onFocus, candidates = [], onClose = () => {}, reviewNotes = []) {
+export function showDetails(feature, sources, onFocus, candidates = [], onClose = () => {}, reviewNotes = [], entities = []) {
   const panel = document.querySelector('#details');
   panel.replaceChildren(); panel.hidden = false;
   const p = feature.properties;
@@ -24,6 +24,11 @@ export function showDetails(feature, sources, onFocus, candidates = [], onClose 
   panel.append(element('p', `${formatYear(p.from)} – ${formatYear(p.display_to ?? p.source_to)} · ${p.kind}`));
   if(p.date_note)panel.append(element('p',p.date_note));
   if(p.identity_note)panel.append(element('h3','Reviewed identity correction'),element('p',p.identity_note),link('Identity reference',p.identity_source));
+  const aliases=entities.find(e=>e.id===p.entity)?.aliases;
+  if(aliases?.length>1) {
+    panel.append(element('h3','Multiple labels share this source identity'),element('p',aliases.join(' / ')),element('p','This may be a rename, composite polity or unresolved identity error. Shared identifiers alone do not establish historical continuity.'));
+    const review=element('a','Review this identity grouping ↗');review.href=`./review.html?entity=${encodeURIComponent(p.entity)}`;panel.append(review);
+  }
   for(const note of reviewNotes.filter(n=>n.entity===p.entity&&n.from<p.to&&p.from<n.to)) {
     panel.append(element('h3','Interpretation note'),element('p',note.text));
     for(const source of note.sources)panel.append(link(source.title,source.url));
@@ -46,7 +51,7 @@ export function showDetails(feature, sources, onFocus, candidates = [], onClose 
     panel.append(element('h3', 'Also recorded at this location'));
     for (const candidate of candidates.filter(c => c.properties.id !== p.id)) {
       const button = element('button', candidate.properties.name, 'candidate');
-      button.onclick = () => showDetails(candidate, sources, onFocus, candidates, onClose, reviewNotes); panel.append(button);
+      button.onclick = () => showDetails(candidate, sources, onFocus, candidates, onClose, reviewNotes,entities); panel.append(button);
     }
     panel.append(element('p', 'Overlaps are preserved from the source. They may represent competing claims or dataset inconsistencies.'));
   }

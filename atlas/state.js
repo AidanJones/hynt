@@ -4,7 +4,8 @@ const DEFAULT_CAMERA = [22, 24, 1.8];
 export function readState(hash = location.hash) {
   const params = new URLSearchParams(hash.replace(/^#/, ''));
   const camera = (params.get('c') || '').split(',').map(Number);
-  const bounds=(params.get('box')||'').split(',').map(Number);
+  const boundParts=(params.get('box')||'').split(',');
+  const bounds=boundParts.every(v=>v.trim()!=='')?boundParts.map(Number):[];
   const validCamera = camera.length === 3 && camera.every(Number.isFinite) && Math.abs(camera[0]) <= 180 && Math.abs(camera[1]) <= 80 && camera[2] >= 0.5 && camera[2] <= 7;
   return {year: parseYear(params.get('y')) ?? 117,
     polity: !params.has('l') || params.get('l').split(',').includes('polity'),

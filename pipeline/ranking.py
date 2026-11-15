@@ -7,6 +7,7 @@ from shapely.geometry import shape
 from shapely import transform, make_valid
 from shapely.ops import unary_union
 from pipeline.package import read_collection
+from pipeline.identity import entity_index
 ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'atlas/data'
 
 def derive(features,top=10):
@@ -36,9 +37,10 @@ def derive(features,top=10):
             rows=history[index[entity]]
             if rows and rows[-1][1]==year and rows[-1][2]==area:rows[-1][1]=end
             else:rows.append([year,end,area])
+    labels={e['id']:e.get('aliases',[]) for e in entity_index(features)}
     return {'metric':'territorial extent','units':'km²','projection':'EPSG:6933',
             'method':'Union of concurrent polygons per entity before equal-area measurement. Distinct overlapping entities rank separately; values must not be summed. Simplified claimed/controlled geometry, not power, population or exact land area.',
-            'entities':[{'id':e,'name':names[e]} for e in entities], 'snapshots':snapshots,
+            'entities':[{'id':e,'name':names[e],**({'aliases':labels[e]} if labels[e] else {})} for e in entities], 'snapshots':snapshots,
             'history':{str(i):rows for i,rows in sorted(history.items())}}
 
 def main():

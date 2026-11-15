@@ -28,6 +28,10 @@ with sync_playwright() as p:
     page.locator('#box-west').fill('20');page.locator('#box-east').fill('-20');page.locator('#apply-box').click()
     assert 'west < east' in page.locator('#box-error').inner_text()
     page.locator('#clear-box').click();assert page.evaluate('window.atlas.state.bounds') is None
+    page.locator('#draw-box').click();page.mouse.move(800,250);page.mouse.down();page.mouse.move(1000,450,steps=8);page.mouse.up()
+    assert page.evaluate('window.atlas.state.bounds') is not None
+    assert page.locator('#draw-box').get_attribute('aria-pressed')=='false'
+    page.locator('#clear-box').click()
     page.set_viewport_size({'width':390,'height':844});assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
     page.screenshot(path=str(OUT/'ranking-focus-mobile.png'))
     assert not errors,errors

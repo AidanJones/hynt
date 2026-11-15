@@ -14,7 +14,7 @@ Three sourced observations are included: Umayyad and Byzantine state affiliation
 
 ## Territorial extent and history
 
-`python -m pipeline.ranking` produces 506 ranking intervals at geometry change points, a top ten and per-entity histories for 1,412 entities. Concurrent polygons are unioned **within each entity** before EPSG:6933 area measurement. Different overlapping entities rank independently; extents are not additive. Values are rounded to whole km² and derive from simplified claimed/controlled geometry. This measures neither population nor overall influence; no unsupported second metric is offered.
+`python -m pipeline.ranking` produces 506 ranking intervals at geometry change points, a top ten and per-entity histories for 1,415 entities. Concurrent polygons are unioned **within each entity** before EPSG:6933 area measurement. Different overlapping entities rank independently; extents are not additive. Values are rounded to whole km² and derive from simplified claimed/controlled geometry. This measures neither population nor overall influence; no unsupported second metric is offered.
 
 Clicking a ranked entity focuses its shapes and opens source details. Its chart shows recorded extent intervals, leaves gaps unjoined and marks the selected year. Identities follow the source except documented crosswalk corrections. Rankings remain global when geographic filters are active. Ranking/history data loads only when needed.
 
@@ -24,6 +24,6 @@ The polity filter accepts four editable bounds or a mouse-drawn box; Escape canc
 
 Mobile controls can be hidden to expose the map. Text and touch targets were enlarged. Inferred technology chunks use diagonal hatching as well as colour. `review.html` makes audit flags searchable. The Pages workflow runs unit/browser checks before publishing; official Actions are pinned to immutable commits.
 
-The offline rebuild validated 13,412 shapes and all 17 lossless era files and regenerated every derived layer. The Han identity correction leaves 140 alias sets and yields 1,412 entities; no geometry was redrawn. Latest test results are in `verification.md`.
+The offline rebuild validated 13,412 shapes and all 17 lossless era files and regenerated every derived layer. The four reviewed identity corrections leave 137 alias sets and yields 1,415 entities; no geometry was redrawn. Latest test results are in `verification.md`.
 
 Original summaries and illustrative anchors are CC0. Polity-derived fills, assignments and extent statistics attribute Cliopatria CC BY 4.0. Linked publications retain their rights. Culture import, comprehensive expert border adjudication and physical-phone certification remain separate tracked work; see `source-review-report.md` and `performance-report.md` for limits.

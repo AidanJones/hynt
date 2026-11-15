@@ -21,6 +21,8 @@ function render() {
 }
 Promise.all(['audit','entities'].map(f=>fetch(`data/${f}.json`).then(r=>{if(!r.ok)throw Error('Could not load audit data');return r.json();}))).then(([a,e])=>{
   audit=a;entities=e;render();
+  const requested=new URLSearchParams(location.search).get('entity');
+  if(requested){document.querySelector('#review-search').value=requested;render();}
   for(const id of ['review-kind','review-search'])document.querySelector(`#${id}`).addEventListener('input',()=>{limit=30;render();});
   document.querySelector('#review-more').onclick=()=>{limit+=30;render();};
 }).catch(e=>{document.querySelector('#error').textContent=e.message;});

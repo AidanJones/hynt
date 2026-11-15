@@ -8,7 +8,7 @@ On the same verified Intel UHD / Direct3D11 renderer, the expanded default 117 C
 
 Cold browser contexts with CDP network throttling measured first **actually rendered polity geometry** at **2.868 s** for 10 Mbps / 40 ms latency and **10.543 s** for 1.6 Mbps / 150 ms latency at a phone-size viewport. Before deferring the optional data, those cases measured 3.491 s and 15.060 s. These are configured desktop laboratory observations on a local HTTP server, not field-network measurements or physical-phone results. Raw final observations: `benchmarks/network-2026-11-15.json`. No Android/iOS device interface was available for physical-device certification, which remains tracked separately.
 
-The full offline rebuild after the reviewed identity correction ships 10,912,617 bytes of polity era files. Older sections retain earlier counts and baselines and are superseded here where they differ.
+The full offline rebuild after the reviewed identity correction ships 10,914,286 bytes of polity era files after the final four identity corrections. Older sections retain earlier counts and baselines and are superseded here where they differ.
 
 Linux CI exposed Python 3.12’s host-specific gzip OS header byte. Packaging now writes the RFC 1952 “unknown” OS value (255), with fixed mtime, on every host. The 17 files were canonicalized without changing decoded payloads or byte counts; manifest hashes were refreshed. Reproducibility checks compare exact packed content and repeated local compression, allowing zlib-version differences in the compressed stream while verifying the platform-neutral header.
 

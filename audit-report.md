@@ -1,6 +1,6 @@
 # Polity data audit
 
-Generated with `python -m pipeline.audit`. 13412 distinct features, 1412 entity keys. Every duplicated era-boundary record was checked for exact equality.
+Generated with `python -m pipeline.audit`. 13412 distinct features, 1415 entity keys. Every duplicated era-boundary record was checked for exact equality.
 
 ## Region / sampled-year counts
 
@@ -17,12 +17,12 @@ Counts are unique recorded entities whose geometry intersects a geographic windo
 | 1280 | 122 | 83 | 15 | 6 | 19 | 12 | 6 | 2 | 3 | 136 |
 | 1700 | 106 | 42 | 24 | 20 | 24 | 25 | 9 | 11 | 19 | 157 |
 | 1920 | 84 | 40 | 21 | 18 | 14 | 15 | 23 | 8 | 11 | 88 |
-| 2024 | 189 | 58 | 52 | 52 | 13 | 17 | 40 | 9 | 21 | 75 |
+| 2024 | 190 | 58 | 52 | 52 | 13 | 18 | 40 | 9 | 21 | 75 |
 
 ## Identity and temporal flags
 
-- 140 entity keys have multiple source labels. Variants are preserved, not automatically split or merged.
-- 1550 same-entity feature pairs overlap in validity. These can be components, aggregate claims or inconsistencies; they are not all errors.
+- 137 entity keys have multiple source labels. Variants are preserved, not automatically split or merged.
+- 1545 same-entity feature pairs overlap in validity. These can be components, aggregate claims or inconsistencies; they are not all errors.
 - Largest spatial overlaps for each sample, feature IDs, alias sets and temporal pairs are in `atlas/data/audit.json`. Areas use EPSG:6933 and a >1 km² threshold; projection and antimeridian effects require review. Shared-edge touches do not count.
 - Do not sum areas of overlapping empire aggregates and component records. A future territorial ranking needs explicit per-entity union and aggregation rules.
 

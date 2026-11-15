@@ -1,5 +1,7 @@
 # Hynt — Human History Atlas
 
+[Open the live atlas](https://aidanjones.github.io/hynt/).
+
 Hynt (Welsh: the course, the way taken) maps changing claimed or controlled territory, with sources attached to every shape.
 
 The viewer includes Cliopatria polities, regional technology evidence, Britain/Wales evidence, migration/site stories, dated events/campaigns, separately typed religion proxies, synchronized comparison, territorial rankings and geographic/entity filters. The original build spec remains the product brief; [SPEC_REVIEW.md](SPEC_REVIEW.md) records corrections and implementation decisions. Remaining source-review/device work is tracked in Beads.
@@ -45,6 +47,8 @@ British evidence is edited in `pipeline/curated/britain.json`; rebuild with `pyt
 Enable **Events & campaigns** for the 1066 dated tour and the cited 476 transition. Enable **Religion evidence & proxies** for the synchronized 750 CE comparison or the distinct India 2011 census observation. **Territorial extent ranking** opens the global leaderboard; selecting an entity shows its recorded history. **Geographic & evidence filters** supports drawing or entering a box. See [milestones-report.md](milestones-report.md) for coverage and methods, and [source-review-report.md](source-review-report.md) for the searchable review queue and remaining source work.
 
 Individual rebuilds: `python -m pipeline.events`, `python -m pipeline.religion`, `python -m pipeline.ranking`. The full build includes these. `python -m pipeline.culture_review` inspects candidate prehistoric snapshots separately; their polygons are not distributed.
+
+Reviewed exact identity decisions live in `pipeline/curated/entity-crosswalk.json`. `python -m pipeline.reconcile` refreshes those decisions in existing packed geometry, then regenerates entity indices, audits, rankings and regional assumptions. Original QIDs remain attached to corrected records. Removing a decision restores the source grouping on refresh.
 
 `python -m pipeline.migrations` validates and packages migration/site stories. `python -m pipeline.audit` regenerates the coverage/overlap report and viewer interpretation notes from current packed data. Both are part of the full rebuild. Six source records with inclusive zero endpoints are now represented without changing membership over valid civil years; original values and the explicit conversion rule are in `pipeline/date-decisions.json`.
 

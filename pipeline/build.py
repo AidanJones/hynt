@@ -11,6 +11,7 @@ from pathlib import Path
 
 from shapely import make_valid
 from shapely.geometry import mapping, shape
+from pipeline.identity import apply_identity,entity_index
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / 'pipeline' / 'raw'
@@ -19,7 +20,6 @@ REVISION = '5f433377139a6eeaeacbdc894b70f8805b72c8b5'
 BASE = f'https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/{REVISION}/'
 ARCHIVE_SHA = 'e10a4e429fca708788ff9e7572a95fce801fae55852d217cffabc1c59cd4eed4'
 TOLERANCE = 0.035  # degrees; world overview, not survey geometry
-CROSSWALK = json.loads((ROOT / 'pipeline/curated/entity-crosswalk.json').read_text(encoding='utf-8'))
 
 
 def next_year(year):
@@ -62,9 +62,6 @@ def normalize(feature, index):
         raise ValueError(f'Invalid source years in record {index}')
     qid = str(p.get('Wikidata', '')).strip()
     qid = qid if re.fullmatch(r'Q\d+', qid) else ''
-    identity = next((r for r in CROSSWALK if r['source_entity']==qid and r['source_name']==p['Name'] and r['source_wikipedia']==p.get('Wikipedia','')),None)
-    original_qid=qid
-    if identity:qid=identity['entity']
     entity = qid or 'cliopatria:' + hashlib.sha256(p['Name'].encode()).hexdigest()[:16]
     geom = polygonal(make_valid(shape(feature['geometry'])))
     if geom.is_empty:
@@ -82,12 +79,10 @@ def normalize(feature, index):
                  wikidata=qid, wikipedia=p.get('Wikipedia', ''),
                  area_km2=round(float(p['Area']), 2), source_record=index,
                  source_from=start, source_to=end)
-    if identity:
-        props.update(source_wikidata=original_qid,identity_note=identity['reason'],identity_source=identity['source'])
     if end == 0:
         props['display_to'] = -1
         props['date_note'] = 'The upstream inclusive endpoint is 0. Over the viewer’s valid civil years (no year zero), this covers years through 1 BCE and excludes 1 CE. The original endpoint is retained; no historical date is inferred.'
-    return {'type': 'Feature', 'id': props['id'], 'properties': props, 'geometry': mapping(final)}
+    return {'type': 'Feature', 'id': props['id'], 'properties': apply_identity(props), 'geometry': mapping(final)}
 
 
 def validate_feature(feature, sources):
@@ -165,7 +160,7 @@ def main():
     write(OUT / 'sources.json', sources)
     write(ROOT / 'pipeline' / 'quarantine.json', quarantined)
     write(ROOT / 'pipeline' / 'date-decisions.json', date_decisions)
-    write(OUT / 'entities.json', sorted(entities.values(), key=lambda x: x['name']))
+    write(OUT / 'entities.json', entity_index(features))
     write(OUT / 'manifest.json', {'schema_version': 1, 'minimum_year': -3400, 'maximum_year': 2026,
                                 'coverage_to': max(f['properties']['source_to'] for f in features),
                                 'revision': REVISION, 'chunks': chunks})

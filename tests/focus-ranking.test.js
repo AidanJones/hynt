@@ -25,4 +25,5 @@ test('spatial window, confidence and rankings round-trip and invalid bounds are 
   const s={...readState('#y=117'),bounds:[-5,50,2,56],confidence:'unknown',ranking:true};
   assert.deepEqual(readState(serializeState(s)),s);
   assert.equal(readState('#box=5,0,-5,10').bounds,null);
+  assert.equal(readState('#box=,0,20,30').bounds,null);
 });

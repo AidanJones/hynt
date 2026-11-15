@@ -74,7 +74,10 @@ export class TechnologyRegions {
     const query=document.querySelector('#technology-area').value.toLocaleLowerCase().trim();
     const filter=document.querySelector('#technology-research').value;
     const rows=this.rows.filter(r=>(!query||r.cell.properties.name.toLocaleLowerCase().includes(query))
-      &&(filter==='all'||(filter==='direct'?['direct','window'].includes(r.status):r.status===filter)));
+      &&(filter==='all'||(filter==='direct'?['direct','window'].includes(r.status):r.status===filter)))
+      .sort((a,b)=>({direct:0,window:0,inferred:1,unknown:2}[a.status]-{direct:0,window:0,inferred:1,unknown:2}[b.status])
+        ||(a.first?.date_from??a.model?.year??Infinity)-(b.first?.date_from??b.model?.year??Infinity)
+        ||a.cell.properties.name.localeCompare(b.cell.properties.name));
     const list=document.querySelector('#technology-region-list');list.replaceChildren();
     const counts={direct:0,window:0,inferred:0,unknown:0};this.rows.forEach(r=>counts[r.status]++);
     document.querySelector('#technology-region-count').textContent=`${counts.direct+counts.window} evidence chunks · ${counts.inferred} inferred only · ${counts.unknown} without coverage in this selection`;

@@ -51,6 +51,16 @@ def test_reviewed_han_identity_is_split_without_mutating_source_or_borders():
     source['properties']['Name']='Chauhan Dynasty'
     assert normalize(source,825)['properties']['entity']=='Q1068371'
 
+@pytest.mark.parametrize('name,article,original,corrected',[
+    ('Lu','Lu (state)','Q555994','Q736936'),
+    ('Republic of Korea','South Korea','Q423','Q884'),
+    ('Republic of Vietnam','South Vietnam','Q172640','Q180573')])
+def test_exact_identity_corrections_preserve_original(name,article,original,corrected):
+    source=source_feature(1,2);source['properties'].update(Name=name,Wikipedia=article,Wikidata=original)
+    p=normalize(source,1)['properties']
+    assert p['entity']==corrected and p['source_wikidata']==original
+    assert p['from']==1 and p['to']==3 and p['identity_source'].endswith(corrected)
+
 def test_zero_end_boundary_preserves_every_valid_civil_year_without_guessing():
     f=normalize(source_feature(-14,0),0)
     p=f['properties'];validate_feature(f,{'cliopatria':{}})

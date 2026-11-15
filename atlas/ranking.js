@@ -16,6 +16,7 @@ export class Ranking {
         const entity=this.data.entities[index],button=element('button',undefined,'ranking-stop');
         button.classList.toggle('rank-focused',state.focus===entity.id);
         button.append(element('span',entity.name),element('strong',`${area.toLocaleString()} km²`));
+        if(entity.aliases?.length>1){button.append(element('small','Multiple source labels · grouping needs review'));button.title=entity.aliases.join(' / ');}
         const bar=element('span',undefined,'ranking-bar');bar.style.width=`${100*area/row[2][0][1]}%`;button.append(bar);
         button.onclick=()=>this.onFocus(entity.id);list.append(button);
       }
@@ -36,6 +37,7 @@ export class Ranking {
     for(const [from,to,area] of rows){const line=document.createElementNS(ns,'path');line.setAttribute('d',`M${x(from)} ${v(area)}H${x(to)}`);line.setAttribute('stroke','#5a786a');line.setAttribute('stroke-width','2');svg.append(line);}
     if(start<=year&&year<end){const line=document.createElementNS(ns,'path');line.setAttribute('d',`M${x(year)} 5V78`);line.setAttribute('stroke','#b25737');svg.append(line);}
     host.append(svg,element('p',`Peak mapped extent ${maximum.toLocaleString()} km². Gaps remain gaps; aliases and composite empires follow source identity.`));
+    if(this.data.entities[index].aliases?.length>1)host.append(element('p',`Grouping needs review: ${this.data.entities[index].aliases.join(' / ')}`));
     const jump=element('button','Jump to first recorded year ↗');jump.onclick=()=>this.onYear(start);host.append(jump);
   }
 }
