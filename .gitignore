@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+pipeline/raw/
+test-results/
+*.log
+.beads.gate.lock

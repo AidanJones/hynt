@@ -1,0 +1,7 @@
+{
+  "encoding": "hynt-polities-1",
+  "original_bytes": 68297906,
+  "shipped_bytes": 10911192,
+  "largest_chunk_bytes": 2454178,
+  "round_trip": "Every property and coordinate equals the validated input; no further simplification."
+}
