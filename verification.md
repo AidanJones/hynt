@@ -1,5 +1,17 @@
 # First-increment verification
 
+## Expanded atlas milestones and source review — 15 November 2026
+
+**57 Python and 29 Node tests passed.** New browser suites passed regional technology coverage, independently dated 1066 campaigns/events, the 476 Italy relation, synchronized religion comparison, the observation-year-only 2011 majority record, territorial rankings, lifespan charts, geographic/confidence filters, source-review search, the corrected Han identity, keyboard stepping and mobile control visibility. Desktop/mobile screenshots were inspected. Existing polity/Britain/technology, deep-time, audit and cross-era retry suites also passed after these additions.
+
+The complete offline source rebuild passed: 13,412 shapes, 1,412 entities, all 17 lossless era packages and every derived layer. The exact Han name/QID/article combination is corrected through a cited crosswalk, preserving raw identity and unchanged geometry/dates. The candidate prehistoric import remains withheld pending its documented source/licence review. Physical iOS/Android testing and broader historical border adjudication remain open; these are not certified by browser tests.
+
+The expanded default map measured 59.96 FPS on verified Intel UHD/D3D11. On-demand optional data reduced the initial resource bodies to 1,571,192 bytes. First rendered polity geometry measured 2.868 s at configured 10 Mbps/40 ms latency; the slower 1.6 Mbps/150 ms phone-size viewport took 10.543 s. These are desktop laboratory results, not physical-phone or field-network certification. Details and reproducible results are in [performance-report.md](performance-report.md), [milestones-report.md](milestones-report.md) and [source-review-report.md](source-review-report.md).
+
+## Regional technology coverage — 15 November 2026
+
+48 Python and 23 Node tests passed; the regional Playwright desktop/mobile suite passed and screenshots were inspected. The feature adds 955 stable land chunks, nine cited records and an optional dated-polity inference model. Unknown regions remain explicit. See [technology-regions-report.md](technology-regions-report.md) for methods, sources and limits.
+
 ## Technology, deep time, audit and performance — 15 November 2026
 
 **45 Python and 20 Node tests passed.** The sequential Playwright polity/Britain/technology, deep-time and audit suites passed, with desktop/mobile layouts inspected. A separate hardware-browser check passed delayed cross-era responses and recovery from a corrupt gzip download. These results supersede older counts and open-work statements below.

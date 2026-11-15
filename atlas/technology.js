@@ -12,6 +12,7 @@ export function visibleTransmissions(data, attestations, year) {
     && byID.get(t.destination).date_to <= year);
 }
 const drawings = {
+  mathematics: '<path d="M5 5h14M5 19h14M7 5l7 7-7 7m10-9h4m-2-2v4"/>',
   farming: '<path d="M12 21V5m0 6C5 11 5 6 5 6s7 0 7 5Zm0 5c7 0 7-5 7-5s-7 0-7 5Zm0-10c5 0 5-4 5-4s-5 0-5 4Z"/>',
   iron: '<path d="m5 21 9-12m-4-5 4-2 7 6-4 4-7-6Z"/>',
   algebra: '<path d="m4 9 8 10m0-10L4 19m12-13c0-4 6-4 6 0 0 2-6 5-6 7h6"/>',

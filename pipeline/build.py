@@ -19,6 +19,7 @@ REVISION = '5f433377139a6eeaeacbdc894b70f8805b72c8b5'
 BASE = f'https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/{REVISION}/'
 ARCHIVE_SHA = 'e10a4e429fca708788ff9e7572a95fce801fae55852d217cffabc1c59cd4eed4'
 TOLERANCE = 0.035  # degrees; world overview, not survey geometry
+CROSSWALK = json.loads((ROOT / 'pipeline/curated/entity-crosswalk.json').read_text(encoding='utf-8'))
 
 
 def next_year(year):
@@ -61,6 +62,9 @@ def normalize(feature, index):
         raise ValueError(f'Invalid source years in record {index}')
     qid = str(p.get('Wikidata', '')).strip()
     qid = qid if re.fullmatch(r'Q\d+', qid) else ''
+    identity = next((r for r in CROSSWALK if r['source_entity']==qid and r['source_name']==p['Name'] and r['source_wikipedia']==p.get('Wikipedia','')),None)
+    original_qid=qid
+    if identity:qid=identity['entity']
     entity = qid or 'cliopatria:' + hashlib.sha256(p['Name'].encode()).hexdigest()[:16]
     geom = polygonal(make_valid(shape(feature['geometry'])))
     if geom.is_empty:
@@ -78,6 +82,8 @@ def normalize(feature, index):
                  wikidata=qid, wikipedia=p.get('Wikipedia', ''),
                  area_km2=round(float(p['Area']), 2), source_record=index,
                  source_from=start, source_to=end)
+    if identity:
+        props.update(source_wikidata=original_qid,identity_note=identity['reason'],identity_source=identity['source'])
     if end == 0:
         props['display_to'] = -1
         props['date_note'] = 'The upstream inclusive endpoint is 0. Over the viewer’s valid civil years (no year zero), this covers years through 1 BCE and excludes 1 CE. The original endpoint is retained; no historical date is inferred.'
@@ -202,12 +208,20 @@ Separate curated evidence is documented in [technology-report.md](technology-rep
 - Confidence is unknown: the source has no per-record uncertainty rating. Bounds are claims/control approximations, not evidence of homogeneous identity.
 - No data means no coverage, not uninhabited land. Current source thresholds and regional completeness need separate audit.
 - Entity reconciliation uses QID then exact source-name hash; QID aliases and inconsistent identities need review.
-- Contested overlaps and same-entity interval overlaps are preserved; click lists candidates. A quantified spatial overlap and region-by-era audit remains outstanding.
+- Contested overlaps and same-entity interval overlaps are preserved; click lists candidates. The sampled spatial/region-by-era audit and searchable review queue are available; exhaustive historical border adjudication remains outstanding. See audit-report.md and source-review-report.md.
 - Performance budgets and expert historical acceptance are not certified by data validation. See verification.md for measured checks.
 '''
     (ROOT / 'build-report.md').write_text(report, encoding='utf-8')
     from pipeline.audit import main as audit_data
     audit_data()
+    from pipeline.technology_regions import main as regional_technologies
+    regional_technologies()
+    from pipeline.events import main as build_events
+    build_events()
+    from pipeline.religion import main as build_religion
+    build_religion()
+    from pipeline.ranking import main as build_ranking
+    build_ranking()
     print(f'Built {len(features)} features in {len(chunks)} era chunks.', flush=True)
 
 

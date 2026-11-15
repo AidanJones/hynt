@@ -1,0 +1,33 @@
+{
+  "observations": [
+    {
+      "case": "broadband-desktop",
+      "bits_per_second": 10000000,
+      "latency_ms": 40,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "first_rendered_polity_seconds": 2.868,
+      "resource_body_bytes": 1571192,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "browser": "159.0.8154.6",
+      "physical_phone": false
+    },
+    {
+      "case": "slower-phone-viewport",
+      "bits_per_second": 1600000,
+      "latency_ms": 150,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "first_rendered_polity_seconds": 10.543,
+      "resource_body_bytes": 1571192,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "browser": "159.0.8154.6",
+      "physical_phone": false
+    }
+  ],
+  "limits": "CDP network throttling on this desktop, cold browser contexts. Small viewport is not a physical phone; local HTTP server and configured latency are not a field network. First render requires visible polity geometry."
+}

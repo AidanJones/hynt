@@ -1,0 +1,31 @@
+{
+  "label": "expanded",
+  "year": 117,
+  "span_years": 80,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "browser": "159.0.8154.6",
+    "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "requested_hardware": true,
+    "viewport": [
+      1440,
+      1000
+    ],
+    "mobile_viewport_only": false
+  },
+  "initial_resource_bytes": 1571192,
+  "scrub": {
+    "frames": 119,
+    "mean_frame_ms": 16.6773109245701,
+    "p95_frame_ms": 18.799999952316284,
+    "observed_fps": 59.96170512877678,
+    "mean_input_cpu_ms": 1.5849999964237214,
+    "operations": {
+      "setFilter": 24,
+      "setLayoutProperty": 0,
+      "setPaintProperty": 0
+    },
+    "stable_technology_marker": true
+  },
+  "limits": "Loopback benchmark within one loaded era, 120 UI updates with rendered polygons. Renderer is reported explicitly; does not certify networks, cross-era loads, phones or universal 60fps."
+}

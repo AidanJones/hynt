@@ -1,0 +1,3 @@
+[
+  {"source_entity":"Q1068371","source_name":"Han Dynasty","source_wikipedia":"Han dynasty","entity":"Q7209","reason":"The source assigns the same QID to Han Dynasty records in ancient China and Chauhan Dynasty records in medieval South Asia. The existing Han dynasty article identifies Q7209; split this exact name/article combination while preserving the source QID. No dates or borders change.","source":"https://www.wikidata.org/wiki/Q7209"}
+]

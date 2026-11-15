@@ -12,14 +12,26 @@
 <body>
   <a class="skip" href="#year-input">Skip to timeline</a>
   <main id="map" aria-label="Historical polity map"></main>
+  <div id="comparison-map" aria-label="Synchronized religion comparison map" hidden></div>
+  <div id="compare-labels" hidden><span>Polity claims / control</span><span id="religion-mode-label">Official religion proxy</span></div>
+  <button id="controls-toggle" aria-controls="map-controls" aria-expanded="true">Hide controls</button>
   <header class="masthead"><a class="brand" href="./" aria-label="Hynt home">hynt<span>THE HUMAN HISTORY ATLAS</span></a><button id="about-button" class="quiet">About & sources ↗</button></header>
-  <aside class="controls card" aria-label="Map controls">
+  <aside id="map-controls" class="controls card" aria-label="Map controls">
     <div class="eyebrow">A WORLD IN MOTION</div><h1>History has<br>no fixed borders.</h1>
     <p class="intro">Explore the lands people claimed and controlled. Follow the evidence through time.</p>
     <label for="search">Find a polity</label><input id="search" type="search" placeholder="Rome, Mali, Mongols…" autocomplete="off" aria-controls="search-results" aria-expanded="false">
     <div id="search-results" class="search-results" hidden></div>
+    <div id="entity-lifespan" hidden></div>
+    <details id="focus-filters" class="evidence-explorer"><summary>Geographic & evidence filters</summary>
+      <p>Show polity shapes touching a geographic window. This filters whole source shapes; it does not clip them. Rankings remain global.</p>
+      <button id="draw-box" aria-pressed="false">Draw a geographic box</button>
+      <div class="box-fields"><label>West<input id="box-west" type="number" min="-180" max="180" step="any"></label><label>South<input id="box-south" type="number" min="-90" max="90" step="any"></label><label>East<input id="box-east" type="number" min="-180" max="180" step="any"></label><label>North<input id="box-north" type="number" min="-90" max="90" step="any"></label></div>
+      <button id="apply-box">Apply window</button><button id="clear-box" class="quiet">Clear window</button><p id="box-error" role="status"></p>
+      <label for="confidence-filter">Source confidence</label><select id="confidence-filter"><option value="all">All available records</option><option value="unknown">Not assessed by source</option></select>
+      <p>The polity source supplies no high/medium/low ratings. No confidence has been invented.</p>
+    </details>
     <label for="region">Explore a region</label><select id="region"><option value="world">The whole world</option><option value="mediterranean">Mediterranean</option><option value="britain">British Isles</option><option value="asia">East Asia</option><option value="southasia">South Asia</option><option value="africa">Sub-Saharan Africa</option><option value="americas">The Americas</option></select>
-    <div class="section-title">MAP LAYERS <span>04 / 08</span></div>
+    <div class="section-title">MAP LAYERS <span>07 AVAILABLE</span></div>
     <label class="layer-row"><span><input id="polity-toggle" type="checkbox" checked> <span class="swatch"></span> Polities & empires</span><span class="live-dot" title="Available">●</span></label>
     <label class="opacity" for="opacity">Fill opacity<input id="opacity" type="range" min="10" max="90" value="58"></label>
     <label class="layer-row technology-toggle"><span><input id="migration-toggle" type="checkbox"> Migrations & early presence</span><span class="live-dot" title="Available">●</span></label>
@@ -46,16 +58,49 @@
       <select id="technology-package"><option value="all">All technology packages</option></select>
       <label for="technology-mode">Evidence display</label>
       <select id="technology-mode"><option value="cumulative">Recorded by this year</option><option value="window">Dated to this year</option></select>
+      <label for="technology-coverage">Regional coverage · retained through time</label>
+      <select id="technology-coverage"><option value="evidence">Chunks with selected evidence</option><option value="polity">Include polity assumptions</option><option value="off">Hide regional coverage</option></select>
+      <p id="technology-regional-hint">Choose one package to see its regional coverage.</p>
+      <div id="technology-regional-controls" hidden>
+        <p class="technology-key">Green: evidence in the chunk. Pale green: within its date window. Hatched ochre: polity assumption only. Grey: no coverage entered by this year. Chunk coverage is cumulative, even when icons show date windows.</p>
+        <p>Chunks are 5° grid cells clipped to present-day land. Any polity overlap can colour a whole chunk; this is a coarse model, not proof of use everywhere.</p>
+        <div id="technology-region-count" role="status"></div>
+        <details><summary>Regional evidence & research gaps</summary>
+          <label for="technology-area">Find geographic chunks</label><input id="technology-area" type="search" placeholder="Europe, South Asia, 50°N…">
+          <label for="technology-research">Show chunks</label><select id="technology-research"><option value="all">All chunks</option><option value="direct">Selected evidence</option><option value="inferred">Polity assumption only</option><option value="unknown">Research gaps</option></select>
+          <div id="technology-region-list"></div><button id="technology-more" class="quiet">Show more chunks</button>
+        </details>
+      </div>
       <p id="technology-summary"></p><div id="technology-components" class="technology-components"></div>
-      <p class="technology-key">Hollow icon: within a date window.<br>Dashed line: cited connection, schematic route.<br>Past evidence persists; adoption is not inferred.</p>
+      <p class="technology-key">Hollow icon: within a date window.<br>Dashed line: cited connection, schematic route.<br>Icons are evidence; optional polity coverage is a separate assumption.</p>
       <div id="technology-count" role="status"></div>
       <button id="technology-fit" class="quiet">Fit recorded places to map ↗</button>
       <details class="technology-journey"><summary>Explore dated milestones</summary><div id="technology-trail"></div></details>
     </details>
     <div class="future"><span>Peoples & cultures</span><small>Milestone 2</small></div>
-    <div class="future"><span>Events & campaigns</span><small>Milestone 3</small></div>
-    <div class="future"><span>Religion</span><small>Milestone 4</small></div>
-    <div class="future"><span>Territorial extent</span><small>Milestone 5</small></div>
+    <label class="layer-row technology-toggle"><span><input id="event-toggle" type="checkbox"> Events & campaigns</span><span class="live-dot" title="Available">●</span></label>
+    <details id="event-explorer" class="evidence-explorer" hidden>
+      <summary>Explore events & cited successions</summary>
+      <p>Markers show events in the selected year. Dashed arrows connect dated anchors; paths between them are illustrative. This is a small sourced selection.</p>
+      <label for="event-category">Event category</label><select id="event-category"><option value="all">All categories</option><option value="battle">Battles</option><option value="landing">Landings</option><option value="political">Political transitions</option></select>
+      <button id="event-tour" class="quiet">Explore the campaigns of 1066 ↗</button>
+      <div id="campaign-date-controls" hidden><label for="campaign-day">Within-year campaign date</label><output id="campaign-date"></output><input id="campaign-day" type="range" min="1" max="365" value="365"><button id="campaign-play">Play dated sequence</button></div>
+      <div id="event-count" role="status"></div><details><summary>Browse events, campaigns & relations</summary><div id="event-list"></div></details>
+    </details>
+    <label class="layer-row technology-toggle"><span><input id="religion-toggle" type="checkbox"> Religion evidence & proxies</span><span class="live-dot" title="Available">●</span></label>
+    <details id="religion-explorer" class="evidence-explorer" hidden><summary>Explore religion evidence</summary>
+      <label for="religion-kind">Meaning of the fill</label><select id="religion-kind"><option value="official">Official religion of ruler/state</option><option value="majority">Population majority · observation year</option></select>
+      <p>State affiliation and population belief are separate evidence types. Blank land means missing data. Polity borders are approximate proxies.</p>
+      <label><input id="religion-compare" type="checkbox"> Compare synchronized maps</label>
+      <button id="religion-tour" class="quiet">Compare Byzantium & Umayyads · 750 CE ↗</button>
+      <button id="religion-majority-tour" class="quiet">Explore India’s 2011 census ↗</button>
+      <div id="religion-count" role="status"></div><div id="religion-list"></div>
+    </details>
+    <label class="layer-row technology-toggle"><span><input id="ranking-toggle" type="checkbox"> Territorial extent ranking</span><span class="live-dot" title="Available">●</span></label>
+    <details id="ranking-explorer" class="evidence-explorer" hidden><summary>Largest mapped extents</summary>
+      <p>Metric: territorial extent, km². Concurrent shapes are unioned per entity. Distinct overlapping entities rank separately; areas are not additive. This measures approximate mapped claims/control, not population or overall influence. Rankings cover the whole dataset, independent of map filters.</p>
+      <div id="ranking-list"></div>
+    </details>
     <button id="clear-focus" class="quiet" hidden>Clear entity focus ×</button>
   </aside>
   <section class="map-caption" aria-label="Map caveat"><span class="hatch"></span><span>Uncoloured land = no data in this layer.<br>Boundaries are approximate. Confidence is not assessed.</span></section>
@@ -66,7 +111,7 @@
     <div class="track"><label class="sr-only" for="year-slider">Year</label><input id="year-slider" type="range" min="0" max="5425" value="3516" step="1"><div class="ticks" aria-hidden="true"><span>3400 BCE</span><span>2000 BCE</span><span>1000 BCE</span><span>1 CE</span><span>1000 CE</span><span>2026 CE</span></div></div>
     <div class="timeline-bottom"><div class="playback"><button id="previous" aria-label="Previous year">‹</button><button id="play" class="play" aria-label="Play timeline">▶</button><button id="next" aria-label="Next year">›</button><label class="sr-only" for="speed">Playback speed</label><select id="speed"><option value="1">1 year / sec</option><option value="10" selected>10 years / sec</option><option value="100">100 years / sec</option></select></div><span id="feature-count">Preparing data</span><button id="share" class="quiet">Copy view link ↗</button></div>
   </section>
-  <dialog id="about"><button id="close-about" class="close" aria-label="Close about">×</button><div class="eyebrow">ABOUT THIS ATLAS</div><h2>The map is a question,<br>not the final word.</h2><p>Hynt traces changing political landscapes. These polygons represent approximate claimed or controlled territory. They do not describe a single ethnicity, language or belief.</p><h3>Evidence & coverage</h3><p>This first release includes Cliopatria polity data from 3400 BCE to 2024 CE. Blank regions are gaps in this dataset, never evidence of empty land. Confidence is not assessed by the source. Land and coastlines are present-day Natural Earth geography.</p><h3>Sources & licences</h3><p><a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener noreferrer">Cliopatria · Seshat Global History Databank</a> — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Geometries repaired, simplified and rounded; dates normalized. Original areas retained. The exact revision and transformation notes are available in each polity's citation.</p><p><a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer">Natural Earth</a> — public domain. MapLibre GL JS 5.6.2 — BSD-3-Clause. Application code — MIT.</p><p>Migration models and dated site evidence are available into prehistory. Religions, events and campaign layers remain planned. Scrub with the slider, use its arrow keys, or enter a civil year. There is no year zero.</p><a href="https://github.com/AidanJones/hynt/issues" target="_blank" rel="noopener noreferrer">Suggest a correction ↗</a></dialog>
+  <dialog id="about"><button id="close-about" class="close" aria-label="Close about">×</button><div class="eyebrow">ABOUT THIS ATLAS</div><h2>The map is a question,<br>not the final word.</h2><p>Hynt traces changing political landscapes. These polygons represent approximate claimed or controlled territory. They do not describe a single ethnicity, language or belief.</p><h3>Evidence & coverage</h3><p>This first release includes Cliopatria polity data from 3400 BCE to 2024 CE. Blank regions are gaps in this dataset, never evidence of empty land. Confidence is not assessed by the source. Land and coastlines are present-day Natural Earth geography.</p><h3>Sources & licences</h3><p><a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener noreferrer">Cliopatria · Seshat Global History Databank</a> — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Geometries repaired, simplified and rounded; dates normalized. Original areas retained. The exact revision and transformation notes are available in each polity's citation.</p><p><a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer">Natural Earth</a> — public domain. MapLibre GL JS 5.6.2 — BSD-3-Clause. Application code — MIT.</p><p>Migration models and dated site evidence are available into prehistory. Events, dated campaigns, religion proxies and territorial rankings are available as selected sourced layers. Scrub with the slider, use its arrow keys, or enter a civil year. There is no year zero.</p><a href="https://github.com/AidanJones/hynt/issues" target="_blank" rel="noopener noreferrer">Suggest a correction ↗</a></dialog>
   <noscript>This atlas requires JavaScript. Its cited source data is available in the data directory.</noscript>
 </body>
 </html>

@@ -1,10 +1,12 @@
-.PHONY: data test technologies britain migrations audit
+.PHONY: data test technologies technology-regions britain migrations audit
 data:
 	python -m pipeline.build
 test:
 	python -m pytest tests
 technologies:
 	python -m pipeline.technologies
+technology-regions:
+	python -m pipeline.technology_regions
 britain:
 	python -m pipeline.britain
 migrations:

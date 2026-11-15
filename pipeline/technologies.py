@@ -8,11 +8,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def load_curated():
     data = json.loads((ROOT / 'pipeline/curated/technologies.json').read_text(encoding='utf-8'))
-    extension = json.loads((ROOT / 'pipeline/curated/technology-expansion.json').read_text(encoding='utf-8'))
-    for key in ['packages','attestations','transmissions']:
-        data[key].extend(extension[key])
-    assert not data['sources'].keys() & extension['sources'].keys(), 'Duplicate source IDs'
-    data['sources'].update(extension['sources'])
+    for filename in ['technology-expansion.json', 'technology-regional.json']:
+        extension = json.loads((ROOT / 'pipeline/curated' / filename).read_text(encoding='utf-8'))
+        for key in ['packages','attestations','transmissions']:
+            data[key].extend(extension[key])
+        assert not data['sources'].keys() & extension['sources'].keys(), 'Duplicate source IDs'
+        data['sources'].update(extension['sources'])
     return data
 
 

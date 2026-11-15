@@ -26,10 +26,13 @@ export function makeLayers(map) {
   map.addLayer({id: 'polity-line', type: 'line', source: 'polities', paint: {'line-color': ['get', 'colour'], 'line-width': 1, 'line-opacity': 0.9, 'line-dasharray': [3, 2]}});
   map.addLayer({id: 'polity-focus', type: 'line', source: 'polities', filter: ['==', ['get', 'entity'], ''], paint: {'line-color': '#364a37', 'line-width': 2.5}});
 }
-export function updateFilters(map, state, opacity, year=state.year) {
-  const previous=filterState.get(map)||{},temporalChanged=previous.year!==year||previous.focus!==state.focus;
+export function updateFilters(map, state, opacity, year=state.year, ids=null) {
+  const boundsKey=state.bounds?.join(',')||'',confidence=state.confidence||'all';
+  const previous=filterState.get(map)||{},temporalChanged=previous.year!==year||previous.focus!==state.focus||previous.boundsKey!==boundsKey||previous.confidence!==confidence||previous.ids!==ids;
   const visibilityChanged=previous.polity!==state.polity,paintChanged=previous.opacity!==opacity||previous.focus!==state.focus;
   const temporal = ['all', ['<=', ['get', 'from'], year], ['>', ['get', 'to'], year]];
+  if(ids)temporal.push(['in',['get','id'],['literal',ids]]);
+  if(confidence!=='all')temporal.push(['==',['get','confidence'],confidence]);
   for (const layer of ['polity-fill', 'polity-line', 'polity-focus']) {
     if (!map.getLayer(layer)) continue;
     if(temporalChanged)map.setFilter(layer, layer === 'polity-focus' ? ['all', temporal, ['==', ['get', 'entity'], state.focus]] : temporal);
@@ -38,7 +41,7 @@ export function updateFilters(map, state, opacity, year=state.year) {
   if (paintChanged&&map.getLayer('polity-fill')) {
     map.setPaintProperty('polity-fill', 'fill-opacity', state.focus ? ['case', ['==', ['get', 'entity'], state.focus], opacity, 0.1] : opacity);
   }
-  filterState.set(map,{year,focus:state.focus,polity:state.polity,opacity});
+  filterState.set(map,{year,focus:state.focus,polity:state.polity,opacity,boundsKey,confidence,ids});
 }
 export class EraStore {
   constructor(manifest,{loader=new PolityLoader()}={}) {this.manifest = manifest; this.cache = new Map();this.loader=loader;}

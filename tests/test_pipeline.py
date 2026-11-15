@@ -41,6 +41,16 @@ def test_missing_citation_fails_validation():
     with pytest.raises(AssertionError):
         validate_feature(f, {})
 
+def test_reviewed_han_identity_is_split_without_mutating_source_or_borders():
+    source=source_feature(-202,220)
+    source['properties'].update(Name='Han Dynasty',Wikidata='Q1068371',Wikipedia='Han dynasty')
+    result=normalize(source,825)
+    assert result['properties']['entity']=='Q7209'
+    assert result['properties']['source_wikidata']=='Q1068371'
+    assert source['properties']['Wikidata']=='Q1068371'
+    source['properties']['Name']='Chauhan Dynasty'
+    assert normalize(source,825)['properties']['entity']=='Q1068371'
+
 def test_zero_end_boundary_preserves_every_valid_civil_year_without_guessing():
     f=normalize(source_feature(-14,0),0)
     p=f['properties'];validate_feature(f,{'cliopatria':{}})

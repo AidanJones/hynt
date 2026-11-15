@@ -2,7 +2,7 @@
 
 Hynt (Welsh: the course, the way taken) maps changing claimed or controlled territory, with sources attached to every shape.
 
-The viewer includes Cliopatria polities, technology/knowledge evidence, Britain/Wales evidence, and migration/site stories. The original build spec remains the product brief; [SPEC_REVIEW.md](SPEC_REVIEW.md) records corrections and implementation decisions. Later milestones are tracked in Beads.
+The viewer includes Cliopatria polities, regional technology evidence, Britain/Wales evidence, migration/site stories, dated events/campaigns, separately typed religion proxies, synchronized comparison, territorial rankings and geographic/entity filters. The original build spec remains the product brief; [SPEC_REVIEW.md](SPEC_REVIEW.md) records corrections and implementation decisions. Remaining source-review/device work is tracked in Beads.
 
 ## Run locally
 
@@ -36,11 +36,15 @@ The first build fetches a pinned archive to ignored `pipeline/raw/`. Use `--offl
 
 Outputs include packed era files, a manifest, citations, an entity index, [build-report.md](build-report.md) and [pipeline/quarantine.json](pipeline/quarantine.json). Invalid source dates are quarantined without guessing; other validation failures stop the build. Geography is simplified for overview use, not precise boundary analysis. Packaging then deduplicates exact geometry, delta-encodes coordinates with exact exceptions and gzips the result. Every chunk must reproduce all validated coordinates and properties exactly. The viewer reconstructs standard GeoJSON before passing it to MapLibre. See [performance-report.md](performance-report.md).
 
-Technology data is edited in `pipeline/curated/technologies.json` and `technology-expansion.json`. Rebuild with `python -m pipeline.technologies`; validation requires dates, citations, coordinates, BP epoch consistency and chronological connections. There are six packages and 23 attestations, including writing and paper. The full pipeline includes this step.
+Technology data is edited in `pipeline/curated/technologies.json`, `technology-expansion.json` and `technology-regional.json`. Rebuild with `python -m pipeline.technologies`; validation requires dates, citations, coordinates, BP epoch consistency and chronological connections. There are seven packages and 32 attestations, including writing, paper and mathematics. Then run `python -m pipeline.technology_regions` to refresh the 955 land chunks and optional dated-polity coverage assumptions. The full pipeline includes both steps. See [technology-regions-report.md](technology-regions-report.md) for the inference rules and research limits.
 
 British evidence is edited in `pipeline/curated/britain.json`; rebuild with `python -m pipeline.britain`. The full pipeline includes both curated layers. `python -m pipeline.package` converts a legacy manifest/GeoJSON export to the packed format; it is also part of the full build. To inspect a packed chunk in Python, use `pipeline.package.read_collection(path)`.
 
 ## Checks
+
+Enable **Events & campaigns** for the 1066 dated tour and the cited 476 transition. Enable **Religion evidence & proxies** for the synchronized 750 CE comparison or the distinct India 2011 census observation. **Territorial extent ranking** opens the global leaderboard; selecting an entity shows its recorded history. **Geographic & evidence filters** supports drawing or entering a box. See [milestones-report.md](milestones-report.md) for coverage and methods, and [source-review-report.md](source-review-report.md) for the searchable review queue and remaining source work.
+
+Individual rebuilds: `python -m pipeline.events`, `python -m pipeline.religion`, `python -m pipeline.ranking`. The full build includes these. `python -m pipeline.culture_review` inspects candidate prehistoric snapshots separately; their polygons are not distributed.
 
 `python -m pipeline.migrations` validates and packages migration/site stories. `python -m pipeline.audit` regenerates the coverage/overlap report and viewer interpretation notes from current packed data. Both are part of the full rebuild. Six source records with inclusive zero endpoints are now represented without changing membership over valid civil years; original values and the explicit conversion rule are in `pipeline/date-decisions.json`.
 
@@ -53,6 +57,11 @@ node --test tests/*.test.js
 ./.venv/Scripts/python.exe tests/deep_time_smoke.py http://127.0.0.1:8000
 ./.venv/Scripts/python.exe tests/audit_smoke.py http://127.0.0.1:8000
 ./.venv/Scripts/python.exe tests/cross_era_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/technology_regions_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/events_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/religion_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/focus_ranking_smoke.py http://127.0.0.1:8000
+./.venv/Scripts/python.exe tests/review_polish_smoke.py http://127.0.0.1:8000
 # Run separately from other browser tests:
 ./.venv/Scripts/python.exe tests/browser_performance.py http://127.0.0.1:8000
 # Windows Direct3D test; inspect the reported renderer, not just this flag:

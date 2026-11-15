@@ -23,6 +23,7 @@ export function showDetails(feature, sources, onFocus, candidates = [], onClose 
   panel.append(element('div', 'THE HISTORICAL RECORD', 'eyebrow'), element('h2', p.name));
   panel.append(element('p', `${formatYear(p.from)} – ${formatYear(p.display_to ?? p.source_to)} · ${p.kind}`));
   if(p.date_note)panel.append(element('p',p.date_note));
+  if(p.identity_note)panel.append(element('h3','Reviewed identity correction'),element('p',p.identity_note),link('Identity reference',p.identity_source));
   for(const note of reviewNotes.filter(n=>n.entity===p.entity&&n.from<p.to&&p.from<n.to)) {
     panel.append(element('h3','Interpretation note'),element('p',note.text));
     for(const source of note.sources)panel.append(link(source.title,source.url));

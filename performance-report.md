@@ -1,5 +1,15 @@
 # Payload and scrub performance — 15 November 2026
 
+## Expanded viewer and throttled-network follow-up
+
+After adding regional technology chunks, campaigns, religion comparison, rankings and filters, the regional ledger and extent history were moved to on-demand requests. This removed 800,000 bytes from the default first view. Measured resource bodies are **1,571,192 bytes**. The full static atlas is approximately **13.4 MB**, still below the checked 15 MB limit.
+
+On the same verified Intel UHD / Direct3D11 renderer, the expanded default 117 CE scrub measured **59.96 FPS**, p95 **18.8 ms**, with 24 filter calls and no redundant visibility/paint calls over 120 updates. This is the default single-map case, not every combination of enabled overlays or dual-map comparison. Raw results: `benchmarks/performance-expanded-2026-11-15.json`.
+
+Cold browser contexts with CDP network throttling measured first **actually rendered polity geometry** at **2.868 s** for 10 Mbps / 40 ms latency and **10.543 s** for 1.6 Mbps / 150 ms latency at a phone-size viewport. Before deferring the optional data, those cases measured 3.491 s and 15.060 s. These are configured desktop laboratory observations on a local HTTP server, not field-network measurements or physical-phone results. Raw final observations: `benchmarks/network-2026-11-15.json`. No Android/iOS device interface was available for physical-device certification, which remains tracked separately.
+
+The full offline rebuild after the reviewed identity correction ships 10,912,617 bytes of polity era files. Older sections retain earlier counts and baselines and are superseded here where they differ.
+
 ## Hardware profiling and update reduction
 
 The software-only result below was not representative of the available GPU. Chromium was explicitly run with its Direct3D11 backend and the renderer was verified as **Intel UHD Graphics (0x00009B41)** on Windows 11 build 26200, driver 31.0.101.2137, Chromium 159.0.8154.6. All benchmark cases assert that actual polity polygons render.

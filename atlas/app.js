@@ -3,6 +3,11 @@ import {readState, writeState} from './state.js';
 import {EraStore, loadJSON, makeLayers, updateFilters,representativeYear} from './layers.js';
 import {element, showDetails} from './panel.js';
 import {TechnologyLayer, visibleAttestations} from './technology.js';
+import {TechnologyRegions} from './technology-regions.js';
+import {EventsLayer,dayOfYear} from './events.js';
+import {ReligionLayer} from './religion.js';
+import {Ranking} from './ranking.js';
+import {BoxFilter,spatialIDs} from './spatial.js';
 import {BritainLayer} from './britain.js';
 import {MigrationLayer} from './migrations.js';
 import {bpToCivil} from './chronology.js';
@@ -11,6 +16,12 @@ const $ = selector => document.querySelector(selector);
 let state = readState(), map, store, sources, entities = [], currentChunk = '', collection = null, ready = false, sequence = 0;
 let selectedID = '', opacity = 0.58;
 let technologies, selectedTechnology = null;
+let technologyRegions;
+let eventLayer;
+let religionLayer;
+let ranking;
+let boxFilter;
+let regionalPromise,rankingPromise;
 let britain, selectedBritish = null;
 let migrations, selectedMigration = null;
 let reviewNotes=[];
@@ -25,7 +36,9 @@ $('#migration-toggle').checked=state.migration;
 
 function applyPolityFilters() {
   const year=collection?.features.length?representativeYear(collection,state.year):state.year<store.manifest.minimum_year?store.manifest.minimum_year-1:state.year;
-  updateFilters(map,state,opacity,year);
+  updateFilters(map,state,opacity,year,spatialIDs(collection,state.bounds));
+  boxFilter?.update(state.bounds);
+  religionLayer?.update(state,collection);
 }
 
 function syncMigrations() {
@@ -37,6 +50,9 @@ function syncMigrations() {
   }
 }
 function selectMigration(record,jump=false) {
+  religionLayer?.clear();
+  eventLayer?.clear();
+  technologyRegions?.clear();
   timeline.stop();selectedID='';selectedBritish=null;selectedTechnology=null;selectedMigration=record;
   state.migration=true;state.focus='';$('#clear-focus').hidden=true;
   if(jump) {
@@ -57,6 +73,9 @@ function syncBritain() {
   }
 }
 function selectBritish(record,jump = false) {
+  religionLayer?.clear();
+  eventLayer?.clear();
+  technologyRegions?.clear();
   selectedMigration=null;
   timeline.stop(); selectedID = ''; selectedTechnology = null; selectedBritish = record;
   state.britain = true; state.focus = ''; $('#clear-focus').hidden = true;
@@ -71,13 +90,39 @@ function syncTechnology() {
   $('#technology-toggle').checked = state.technology;
   $('#technology-package').value = state.technologyPackage;
   $('#technology-mode').value = state.technologyMode;
+  $('#technology-coverage').value = state.technologyCoverage;
   if (technologies) {
     technologies.update(state);
     if (selectedTechnology && state.technology) technologies.showDetails(selectedTechnology, state.year);
     else if (selectedTechnology) {selectedTechnology = null; $('#details').hidden = true;}
+    const needsRegions=state.technology&&state.technologyCoverage!=='off'&&state.technologyPackage!=='all';
+    $('#technology-regional-hint').hidden=!state.technology||state.technologyCoverage==='off'||state.technologyPackage!=='all';
+    if(needsRegions&&!technologyRegions&&!regionalPromise) {
+      $('#technology-regional-controls').hidden=false;$('#technology-region-count').textContent='Loading regional evidence…';
+      regionalPromise=loadJSON('data/technology-regions.json').then(data=>{
+        technologyRegions=new TechnologyRegions(map,data,technologies.data,selectTechnology,()=>{
+          religionLayer?.clear();eventLayer?.clear();timeline.stop();selectedID='';selectedTechnology=null;selectedBritish=null;selectedMigration=null;
+        });technologyRegions.update(state);
+      }).catch(()=>{regionalPromise=null;$('#technology-region-count').textContent='Regional evidence could not load. Change the coverage selector to retry.';});
+    }
+    if(!needsRegions)$('#technology-regional-controls').hidden=true;
+    technologyRegions?.update(state);
   }
 }
+function syncRanking() {
+  if((state.ranking||state.focus)&&!ranking&&!rankingPromise) {
+    $('#ranking-list').textContent='Loading territorial extent history…';
+    if(state.focus){$('#entity-lifespan').hidden=false;$('#entity-lifespan').textContent='Loading extent history…';}
+    rankingPromise=loadJSON('data/influence.json').then(data=>{
+      ranking=new Ranking(data,id=>fitEntity(id),year=>{timeline.stop();state.year=year;update();});ranking.update(state);
+    }).catch(()=>{rankingPromise=null;$('#ranking-list').textContent='Extent history could not load. Toggle ranking to retry.';});
+  }
+  $('#ranking-explorer').hidden=!state.ranking;ranking?.update(state);
+}
 function selectTechnology(record, jump = false) {
+  religionLayer?.clear();
+  eventLayer?.clear();
+  technologyRegions?.clear();
   selectedMigration=null;
   selectedBritish = null;
   timeline.stop(); selectedID = ''; selectedTechnology = record;
@@ -94,9 +139,13 @@ function selectTechnology(record, jump = false) {
 
 function focusEntity(id) {
   state.focus = id; $('#clear-focus').hidden = !id;
+  syncRanking();
   applyPolityFilters(); writeState(state);
 }
 function details(feature, candidates) {
+  religionLayer?.clear();
+  eventLayer?.clear();
+  technologyRegions?.clear();
   selectedMigration=null;
   selectedBritish = null;
   selectedTechnology = null;
@@ -104,9 +153,10 @@ function details(feature, candidates) {
   showDetails(feature, sources, focusEntity, candidates, () => {selectedID = '';},reviewNotes);
 }
 function countActive() {
-  const active = collection?.features.filter(f => f.properties.from <= state.year && state.year < f.properties.to) || [];
+  const ids=spatialIDs(collection,state.bounds),allowed=ids?new Set(ids):null;
+  const active = collection?.features.filter(f => f.properties.from <= state.year && state.year < f.properties.to&&(!allowed||allowed.has(f.properties.id))&&(state.confidence==='all'||f.properties.confidence===state.confidence)) || [];
   const count = new Set(active.map(f => f.properties.entity)).size;
-  $('#feature-count').textContent = state.polity ? `${count.toLocaleString()} polities recorded · ${formatYear(state.year)}` : 'Polity layer hidden';
+  $('#feature-count').textContent = state.polity ? `${count.toLocaleString()} polities ${state.bounds?'touching window':'recorded'} · ${formatYear(state.year)}` : 'Polity layer hidden';
   const focused = entities.find(e => e.id === state.focus);
   if (state.year < store.manifest.minimum_year) status('Before 3400 BCE: no polity data. Other enabled layers show separate evidence.');
   else if (state.year > store.manifest.coverage_to) status(`No polity data after ${store.manifest.coverage_to}. Borders have not been extrapolated.`);
@@ -124,12 +174,17 @@ async function update() {
   syncTechnology();
   syncBritain();
   syncMigrations();
+  $('#event-toggle').checked=state.events;$('#event-category').value=state.eventCategory;
+  eventLayer?.update(state);
+  $('#religion-toggle').checked=state.religion;$('#religion-kind').value=state.religionKind;$('#religion-compare').checked=state.compareReligion;
+  $('#ranking-toggle').checked=state.ranking;syncRanking();
+  $('#confidence-filter').value=state.confidence;
   applyPolityFilters();
   const chunk = store.chunk(state.year), request = ++sequence;
   if (!chunk) {
     if(!collection||collection.features.length){collection={type:'FeatureCollection',features:[]};map.getSource('polities').setData(collection);}
     currentChunk = '';selectedID = '';
-    if (!selectedTechnology && !selectedBritish && !selectedMigration) $('#details').hidden = true;
+    if (!selectedTechnology && !selectedBritish && !selectedMigration && !technologyRegions?.selected && !eventLayer?.selected && !religionLayer?.selected) $('#details').hidden = true;
     $('#retry').hidden = true; countActive(); return;
   }
   if (chunk.url === currentChunk && collection) {
@@ -140,7 +195,7 @@ async function update() {
   // Never leave a previous era's polygons visible while another era loads.
   map.getSource('polities').setData({type:'FeatureCollection', features:[]});
   collection = null; currentChunk = ''; selectedID = '';
-  if (!selectedTechnology && !selectedBritish && !selectedMigration) $('#details').hidden = true;
+  if (!selectedTechnology && !selectedBritish && !selectedMigration && !technologyRegions?.selected && !eventLayer?.selected && !religionLayer?.selected) $('#details').hidden = true;
   status(`Loading records for ${formatYear(state.year)}…`); $('#retry').hidden = true;
   try {
     const result = await store.load(chunk);
@@ -156,6 +211,9 @@ async function update() {
   }
 }
 function fitEntity(id) {
+  religionLayer?.clear();
+  eventLayer?.clear();
+  technologyRegions?.clear();
   const entity = entities.find(e => e.id === id);
   if (!entity) return;
   timeline.stop();
@@ -201,6 +259,8 @@ $('#polity-toggle').onchange = event => {state.polity = event.target.checked; up
 $('#migration-toggle').onchange=event=>{state.migration=event.target.checked;$('#migration-explorer').open=state.migration;update();};
 $('#migration-story').onchange=event=>{state.migrationStory=event.target.value;selectedMigration=null;$('#details').hidden=true;update();};
 $('#migration-tour').onclick=()=>{
+  eventLayer?.clear();
+  technologyRegions?.clear();
   if(!ready)return;timeline.stop();selectedMigration=null;selectedBritish=null;selectedTechnology=null;selectedID='';$('#details').hidden=true;
   state.year=bpToCivil(100000);state.migration=true;state.migrationStory='all';state.focus='';$('#clear-focus').hidden=true;
   map.flyTo({center:[40,15],zoom:1.5,duration:reducedMotion?0:650});update();
@@ -210,6 +270,8 @@ $('#britain-toggle').onchange = event => {state.britain = event.target.checked; 
 $('#britain-kind').onchange = event => {state.britainKind = event.target.value; selectedBritish = null; $('#details').hidden = true; update();};
 $('#britain-mode').onchange = event => {state.britainMode = event.target.value; update();};
 $('#britain-tour').onclick = () => {
+  eventLayer?.clear();
+  technologyRegions?.clear();
   if (!ready) return;
   timeline.stop(); selectedBritish = null; selectedTechnology = null; selectedMigration=null; selectedID = ''; $('#details').hidden = true;
   state.year = -700; state.britain = true; state.britainKind = 'all'; state.britainMode = 'cumulative'; state.focus = '';
@@ -228,6 +290,40 @@ $('#technology-fit').onclick = () => {
   map.fitBounds(bounds,{maxZoom:4, padding:innerWidth > 650 ? {left:330,right:$('#details').hidden ? 80 : 350,top:145,bottom:260} : {left:35,right:35,top:150,bottom:280}, duration:reducedMotion ? 0 : 650});
 };
 $('#technology-mode').onchange = event => {state.technologyMode = event.target.value; update();};
+$('#technology-coverage').onchange = event => {state.technologyCoverage = event.target.value; update();};
+$('#religion-toggle').onchange=e=>{state.religion=e.target.checked;$('#religion-explorer').open=state.religion;update();};
+$('#religion-kind').onchange=e=>{state.religionKind=e.target.value;update();};
+$('#religion-compare').onchange=e=>{state.compareReligion=e.target.checked;update();};
+function religionTour(majority=false) {
+  if(!ready)return;timeline.stop();religionLayer?.clear();eventLayer?.clear();technologyRegions?.clear();
+  selectedID='';selectedTechnology=null;selectedBritish=null;selectedMigration=null;$('#details').hidden=true;
+  state.year=majority?2011:750;state.religion=true;state.religionKind=majority?'majority':'official';state.compareReligion=true;state.polity=true;
+  state.technologyCoverage='off';state.focus='';$('#clear-focus').hidden=true;$('#religion-explorer').open=true;
+  map.fitBounds(majority?[[65,5],[95,37]]:[[-12,5],[70,55]],{padding:innerWidth>650?{left:320,right:80,top:130,bottom:250}:30,duration:0});update();
+}
+$('#religion-tour').onclick=()=>religionTour();$('#religion-majority-tour').onclick=()=>religionTour(true);
+$('#ranking-toggle').onchange=e=>{state.ranking=e.target.checked;$('#ranking-explorer').open=state.ranking;update();};
+$('#confidence-filter').onchange=e=>{state.confidence=e.target.value;update();};
+$('#controls-toggle').onclick=()=>{const controls=$('#map-controls');controls.hidden=!controls.hidden;$('#controls-toggle').textContent=controls.hidden?'Show controls':'Hide controls';$('#controls-toggle').setAttribute('aria-expanded',String(!controls.hidden));};
+$('#event-toggle').onchange=e=>{state.events=e.target.checked;$('#event-explorer').open=state.events;update();};
+$('#event-category').onchange=e=>{state.eventCategory=e.target.value;update();};
+$('#campaign-day').oninput=e=>{timeline.stop();state.campaignDay=Number(e.target.value);update();};
+$('#event-tour').onclick=()=>{
+  if(!ready)return;timeline.stop();technologyRegions?.clear();eventLayer?.clear();
+  selectedTechnology=null;selectedBritish=null;selectedMigration=null;selectedID='';$('#details').hidden=true;
+  state.year=1066;state.events=true;state.eventCategory='all';state.campaignDay=365;state.focus='';$('#clear-focus').hidden=true;
+  $('#event-explorer').open=true;
+  map.fitBounds([[-2,50],[1,55]],{padding:innerWidth>650?{left:320,right:80,top:130,bottom:250}:40,duration:0});update();
+};
+let campaignTimer=null;
+$('#campaign-play').onclick=()=>{
+  if(campaignTimer){clearInterval(campaignTimer);campaignTimer=null;$('#campaign-play').textContent='Play dated sequence';return;}
+  timeline.stop();state.year=1066;state.events=true;state.campaignDay=260;update();$('#campaign-play').textContent='Pause dated sequence';
+  campaignTimer=setInterval(()=>{
+    if(!state.events||state.year!==1066||state.campaignDay>=290){clearInterval(campaignTimer);campaignTimer=null;$('#campaign-play').textContent='Play dated sequence';return;}
+    state.campaignDay++;update();
+  },150);
+};
 $('#opacity').oninput = event => {opacity = Number(event.target.value) / 100; if (ready) applyPolityFilters();};
 $('#retry').onclick = () => ready ? update() : location.reload();
 $('#region').onchange = event => {
@@ -257,7 +353,7 @@ async function init() {
   const context = probe.getContext('webgl2');
   if (!context) throw new Error('WebGL 2 is not available in this browser.');
   context.getExtension('WEBGL_lose_context')?.loseContext();
-  const [manifest, sourceData, entityData, technologyData, britainData, migrationData, notes] = await Promise.all(['manifest', 'sources', 'entities', 'technologies', 'britain', 'migrations', 'review-notes'].map(file => loadJSON(`data/${file}.json`)));
+  const [manifest, sourceData, entityData, technologyData, britainData, migrationData, notes, eventData, religionData] = await Promise.all(['manifest', 'sources', 'entities', 'technologies', 'britain', 'migrations', 'review-notes', 'events', 'religion'].map(file => loadJSON(`data/${file}.json`)));
   reviewNotes=notes;
   sources = sourceData; entities = entityData; store = new EraStore(manifest);
   if (!entities.some(e => e.id === state.focus)) state.focus = '';
@@ -279,17 +375,38 @@ async function init() {
   technologies = new TechnologyLayer(map, technologyData, selectTechnology, () => {selectedTechnology = null;});
   britain = new BritainLayer(map,britainData,selectBritish,() => {selectedBritish = null;});
   migrations=new MigrationLayer(map,migrationData,selectMigration,()=>{selectedMigration=null;});
+  eventLayer=new EventsLayer(map,eventData,(r,jump)=>{
+    religionLayer?.clear();
+    timeline.stop();technologyRegions?.clear();selectedID='';selectedTechnology=null;selectedBritish=null;selectedMigration=null;
+    state.events=true;
+    if(jump){state.year=r.year;state.eventCategory='all';state.campaignDay=r.date?dayOfYear(r.date):365;
+      const points=r.waypoints?r.waypoints.map(w=>w.coordinates):r.origin?r.coordinates:[r.coordinates];
+      const bounds=points.reduce((b,p)=>b.extend(p),new maplibregl.LngLatBounds());
+      map.fitBounds(bounds,{padding:innerWidth>650?{left:320,right:340,top:130,bottom:250}:40,maxZoom:5,duration:0});}
+    update();
+  });
+  $('#event-explorer').open=state.events;
+  religionLayer=new ReligionLayer(map,religionData,()=>{
+    timeline.stop();technologyRegions?.clear();eventLayer?.clear();selectedID='';selectedTechnology=null;selectedBritish=null;selectedMigration=null;
+  });
+  $('#religion-explorer').open=state.religion;
+  $('#ranking-explorer').open=state.ranking;
+  boxFilter=new BoxFilter(map,bounds=>{state.bounds=bounds;update();});
   if(state.migrationStory!=='all'&&!migrationData.records.some(r=>r.id===state.migrationStory))state.migrationStory='all';
   $('#migration-explorer').open=state.migration;
   $('#technology-explorer').open = state.technology && state.technologyPackage !== 'all';
   $('#britain-explorer').open = state.britain && state.britainKind !== 'all';
   $('#about').append(element('h3','Britain & Wales evidence'),element('p','A small cited selection of monuments, objects, named rulers and community attestations. Dates may refer to construction, object dating or one historical episode; each record explains which. Regional anchors are illustrative, not borders. The compilation is CC0; linked sources retain their own rights.'));
-  const note = element('p','Technology markers are a small curated selection of dated evidence for farming, ironworking, algebra, printing, writing and paper. Regional and city anchors are approximate. Past evidence persists in the cumulative display; it does not imply continued or universal adoption. Dashed connections have their own citations. The original factual compilation is CC0; linked publications retain their own rights.');
+  const note = element('p','Technology markers are a small curated selection of dated evidence for farming, ironworking, algebra, printing, writing, paper and mathematics. Regional and city anchors are approximate. Past evidence persists in the cumulative display; it does not imply continued or universal adoption. Dashed connections have their own citations. The original factual compilation is CC0; linked publications retain their own rights.');
   $('#about').append(element('h3','Technology & knowledge'),note);
+  const reviewLink=element('a','Browse source-review flags ↗');reviewLink.href='./review.html';
+  $('#about').append(element('h3','Review the historical record'),reviewLink,element('p','Regional technology coverage can optionally include a labelled polity assumption. Events/campaigns and religion proxies are selected sourced records, with their own date and scope limits. Rankings measure mapped territorial extent; overlapping entities are not additive.'));
   if (state.technologyPackage !== 'all' && !technologies.packages.has(state.technologyPackage)) state.technologyPackage = 'all';
   ready = true;
   map.on('moveend', () => {const c = map.getCenter(); state.camera = [c.lng, c.lat, map.getZoom()]; writeState(state);});
   map.on('click', 'polity-fill', event => {
+    if(state.religion&&!state.compareReligion&&map.queryRenderedFeatures(event.point,{layers:['religion-fill']}).length)return;
+    if(state.technology && state.technologyCoverage!=='off' && state.technologyPackage!=='all')return;
     const ids = [...new Set(event.features.map(f => f.properties.id))];
     const candidates = ids.map(id => collection?.features.find(f => f.properties.id === id)).filter(Boolean);
     if (candidates.length) details(candidates[0], candidates);
@@ -304,6 +421,6 @@ async function init() {
   map.on('error', () => {status('A map resource failed to load. Reload or retry if the map is incomplete.'); $('#retry').hidden = false;});
   await update();
   // Read-only diagnostics for smoke tests and performance measurements.
-  window.atlas = {map, get state() {return {...state};}, get features() {return collection?.features || [];}};
+  window.atlas = {map, get comparisonMap(){return religionLayer.compare;}, get state() {return {...state};}, get features() {return collection?.features || [];}};
 }
 init().catch(error => {status(error.message.includes('WebGL') ? error.message : 'The atlas could not start. Check local data files and retry.'); $('#retry').hidden = false; console.error(error);});

@@ -21,8 +21,8 @@ test('year parsing accepts eras and rejects invalid input', () => {
   for (const text of ['0','0 BCE','2027','-300001','300001 BP','hello','1.5']) assert.equal(parseYear(text), null);
 });
 test('share state round-trips layers, focus, camera and civil year', () => {
-  const state = {year:-1, polity:false, technology:true, technologyPackage:'algebra', technologyMode:'window', britain:true, britainKind:'ruler',britainMode:'window',migration:false,migrationStory:'all', focus:'Q12544', camera:[12.5,41.9,4]};
-  assert.deepEqual(readState(serializeState(state)), state);
+  const state = {year:-1, polity:false, technology:true, technologyPackage:'algebra', technologyMode:'window',technologyCoverage:'polity', britain:true, britainKind:'ruler',britainMode:'window',migration:false,migrationStory:'all', focus:'Q12544', camera:[12.5,41.9,4]};
+  assert.deepEqual(readState(serializeState(state)), {...readState('#'),...state});
   const invalid = readState('#y=0&c=NaN,91,90&l=nonsense');
   assert.equal(invalid.year,117); assert.deepEqual(invalid.camera,[22,24,1.8]); assert.equal(invalid.polity,false);
 });

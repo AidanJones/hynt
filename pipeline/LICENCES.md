@@ -4,6 +4,10 @@ Application code: repository MIT licence. Data licences are separate.
 
 ## Distributed
 
+- **Events/campaigns/relations and religion observations:** original factual summaries and illustrative anchors are CC0. Linked institutional/scholarly publications retain their rights; no publication text, maps or bulk religion datasets are imported. Religion and ranking polygons derive from attributed Cliopatria CC BY 4.0. The cited Han identity crosswalk retains the original source QID and uses Wikidata CC0 facts.
+
+- **Regional technology ledger:** original evidence summaries are CC0; geographic chunks use public-domain Natural Earth land. Assignments derived from Cliopatria preserve pinned revision and original polity identifiers and are attributed CC BY 4.0. Model output is explicitly an inference, not additional source evidence. See `technology-regions-report.md`.
+
 - **Migration/site stories:** original summaries and schematic geometry are CC0. Linked scholarly publications retain their rights. No published migration maps, photographs or genome records are copied. `migrations-report.md` records the distinction between route models and dated site evidence.
 
 - **Britain/Wales evidence compilation:** original factual summaries, references, date explanations and illustrative anchors are CC0-1.0. Cadw, museum, university and Coflein publications retain their own rights. No source images, maps, bulk exports or quoted descriptions are included. The compilation does not inherit a bulk dataset licence from the sources it links.
