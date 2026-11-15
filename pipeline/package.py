@@ -10,6 +10,13 @@ FORMAT = 'hynt-polities-1'
 SCALE = 10000
 
 
+def deterministic_gzip(payload):
+    # Python 3.12's zlib shortcut writes a host-specific OS byte for mtime=0.
+    # RFC 1952 permits 255 (unknown); gzip.compress does not set a header CRC.
+    compressed = gzip.compress(payload, compresslevel=9, mtime=0)
+    return compressed[:9] + b'\xff' + compressed[10:]
+
+
 def pack_ring(points):
     deltas, exact, previous = [], [], [0, 0]
     for index, point in enumerate(points):
@@ -79,7 +86,7 @@ def main():
         packed = pack_collection(original)
         assert unpack_collection(packed) == original, f"Lossless round-trip failed: {chunk['url']}"
         encoded = json.dumps(packed, ensure_ascii=False, separators=(',', ':'), allow_nan=False).encode('utf-8')
-        compressed = gzip.compress(encoded, compresslevel=9, mtime=0)
+        compressed = deterministic_gzip(encoded)
         relative = chunk['url'].replace('.geojson', '.json.gz')
         (DATA / relative).write_bytes(compressed)
         expanded = original_path.stat().st_size

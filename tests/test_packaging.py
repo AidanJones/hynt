@@ -42,4 +42,26 @@ def test_gzip_build_is_deterministic():
     path=ROOT/'atlas/data'/chunk['url']
     rebuilt=pack_collection(read_collection(path))
     encoded=json.dumps(rebuilt,ensure_ascii=False,separators=(',',':'),allow_nan=False).encode()
-    assert gzip.compress(encoded,compresslevel=9,mtime=0)==path.read_bytes()
+    from pipeline.package import deterministic_gzip
+    import hashlib
+    first=deterministic_gzip(encoded)
+    assert hashlib.sha256(first).digest()==hashlib.sha256(deterministic_gzip(encoded)).digest()
+    # Deflate streams may change across zlib versions; packaged JSON must not.
+    assert hashlib.sha256(gzip.decompress(path.read_bytes())).digest()==hashlib.sha256(encoded).digest()
+    assert first[4:8]==b'\0\0\0\0' and first[9]==255
+    assert path.read_bytes()[9]==255
+
+
+def test_gzip_header_is_neutral_across_host_os_values(monkeypatch):
+    from pipeline.package import deterministic_gzip
+    original=gzip.compress
+    def host_compress(os_byte):
+        def compress(*args,**kwargs):
+            result=original(*args,**kwargs)
+            return result[:9]+bytes([os_byte])+result[10:]
+        return compress
+    monkeypatch.setattr(gzip,'compress',host_compress(3))
+    unix=deterministic_gzip(b'cross-platform evidence payload')
+    monkeypatch.setattr(gzip,'compress',host_compress(10))
+    windows=deterministic_gzip(b'cross-platform evidence payload')
+    assert unix==windows and gzip.decompress(unix)==b'cross-platform evidence payload'

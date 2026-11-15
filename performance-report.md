@@ -10,6 +10,8 @@ Cold browser contexts with CDP network throttling measured first **actually rend
 
 The full offline rebuild after the reviewed identity correction ships 10,912,617 bytes of polity era files. Older sections retain earlier counts and baselines and are superseded here where they differ.
 
+Linux CI exposed Python 3.12’s host-specific gzip OS header byte. Packaging now writes the RFC 1952 “unknown” OS value (255), with fixed mtime, on every host. The 17 files were canonicalized without changing decoded payloads or byte counts; manifest hashes were refreshed. Reproducibility checks compare exact packed content and repeated local compression, allowing zlib-version differences in the compressed stream while verifying the platform-neutral header.
+
 ## Hardware profiling and update reduction
 
 The software-only result below was not representative of the available GPU. Chromium was explicitly run with its Direct3D11 backend and the renderer was verified as **Intel UHD Graphics (0x00009B41)** on Windows 11 build 26200, driver 31.0.101.2137, Chromium 159.0.8154.6. All benchmark cases assert that actual polity polygons render.
