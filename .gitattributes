@@ -1,0 +1,2 @@
+# Preserve the pinned upstream licence bytes used by the culture-source hash.
+atlas/data/cultures/LICENSE.txt -text
