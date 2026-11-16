@@ -46,7 +46,9 @@ British evidence is edited in `pipeline/curated/britain.json`; rebuild with `pyt
 
 Enable **Events & campaigns** for the 1066 dated tour and the cited 476 transition. Enable **Religion evidence & proxies** for the synchronized 750 CE comparison or the distinct India 2011 census observation. **Territorial extent ranking** opens the global leaderboard; selecting an entity shows its recorded history. **Geographic & evidence filters** supports drawing or entering a box. See [milestones-report.md](milestones-report.md) for coverage and methods, and [source-review-report.md](source-review-report.md) for the searchable review queue and remaining source work.
 
-Individual rebuilds: `python -m pipeline.events`, `python -m pipeline.religion`, `python -m pipeline.ranking`. The full build includes these. `python -m pipeline.culture_review` inspects candidate prehistoric snapshots separately; their polygons are not distributed.
+Individual rebuilds: `python -m pipeline.events`, `python -m pipeline.religion`, `python -m pipeline.ranking`. The full build includes these. `python -m pipeline.culture_review` audits candidate prehistoric snapshots; `python -m pipeline.cultures` builds the six separately licensed, explicitly partial Jōmon, Ubaid and Narva snapshots. See [culture-report.md](culture-report.md) and [the latest identity review](review-pass-2026-11-16.md).
+
+For physical-phone performance evidence, open [the device check](https://aidanjones.github.io/hynt/device-check.html), keep its tab visible and share its exported JSON. [DEVICE_TESTING.md](DEVICE_TESTING.md) describes the procedure and desktop-test limits.
 
 Reviewed exact identity decisions live in `pipeline/curated/entity-crosswalk.json`. `python -m pipeline.reconcile` refreshes those decisions in existing packed geometry, then regenerates entity indices, audits, rankings and regional assumptions. Original QIDs remain attached to corrected records. Removing a decision restores the source grouping on refresh.
 
@@ -88,4 +90,4 @@ Beads tracks the initial milestones and follow-up work, including technologies a
 
 Application code is MIT. Cliopatria data is **CC BY 4.0**, attributed to its contributors and the Seshat Global History Databank. Natural Earth land is public domain; MapLibre is BSD-3-Clause. See [pipeline/LICENCES.md](pipeline/LICENCES.md) and the viewer's About dialog for attribution and transformations.
 
-Blank land means missing data. Confidence is shown as not assessed, because the source does not provide individual ratings. A polity shape does not represent a homogeneous people or religion. Present-day coastlines provide context. GitHub Pages deployment remains a tracked later milestone.
+Blank land means missing data. Confidence is shown as not assessed, because the source does not provide individual ratings. A polity shape does not represent a homogeneous people or religion. Present-day coastlines provide context. The atlas is published through the verified GitHub Pages workflow.

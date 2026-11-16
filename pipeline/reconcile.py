@@ -30,6 +30,8 @@ def main():
     from pipeline.ranking import main as ranking
     from pipeline.technology_regions import main as regions
     audit();ranking();regions()
+    from pipeline.review_pack import main as review_pack
+    review_pack()
     build_report=ROOT/'build-report.md'
     if build_report.exists():
         text=build_report.read_text(encoding='utf-8')

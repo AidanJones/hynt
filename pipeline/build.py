@@ -217,6 +217,10 @@ Separate curated evidence is documented in [technology-report.md](technology-rep
     build_religion()
     from pipeline.ranking import main as build_ranking
     build_ranking()
+    from pipeline.cultures import main as build_cultures
+    build_cultures()
+    from pipeline.review_pack import main as review_pack
+    review_pack()
     print(f'Built {len(features)} features in {len(chunks)} era chunks.', flush=True)
 
 

@@ -1,3 +1,5 @@
+> 16 November update: selected archaeological polygons are now available separately; see [culture-report.md](culture-report.md). Earlier no-import statements below describe the previous increment.
+
 # Deep time and migrations
 
 The timeline now reaches 300,000 BP, with BP explicitly referenced to 1950 CE. `ya` input instead means years before the atlas's fixed 2026 CE endpoint. BCE/CE has no year zero. Slider steps are 1,000 years down to 12,000 BP, 50 years until 3400 BCE, then annual. Precise entered dates and URLs remain supported between the coarse stops. Prehistoric playback advances through these coarse stops, rather than waiting thousands of seconds at annual speed.

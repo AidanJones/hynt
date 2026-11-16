@@ -1,0 +1,13 @@
+Selected archaeological snapshots from historical-basemaps
+Author: André Ourednik and repository contributors
+Source: https://github.com/aourednik/historical-basemaps
+Revision: 4b5039e50d8d2464b065bd76ad6086cd4597108d
+Distributed under GPL-3.0-only; full terms in LICENSE.txt.
+
+Corresponding selected original GeoJSON features, snapshot URLs, hashes and
+indices are bundled in source.json. Transformation recipe: pipeline/cultures.py
+in https://github.com/aidanjones/hynt (same published revision as this viewer).
+Changes: selected six features; repaired geometry and simplified 0.01 degrees;
+added explicit display intervals, partial-footprint labels and cited context.
+Independent references do not certify each source boundary.
+Upstream licence clarification issue 74 remains open and is recorded in provenance.

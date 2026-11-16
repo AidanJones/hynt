@@ -26,12 +26,15 @@ export function readState(hash = location.hash) {
     britainKind: ['ruler','site','community','artefact'].includes(params.get('bk')) ? params.get('bk') : 'all',
     britainMode: params.get('bm') === 'window' ? 'window' : 'cumulative',
     migration: params.has('l') && params.get('l').split(',').includes('migration'),
+    cultures: params.has('l') && params.get('l').split(',').includes('cultures'),
+    cultureKind: ['culture:jomon','culture:ubaid','culture:narva'].includes(params.get('culture'))?params.get('culture'):'all',
     migrationStory: /^[a-z-]{1,60}$/.test(params.get('m') || '') ? params.get('m') : 'all',
     focus: (params.get('f') || '').slice(0, 120),
     camera: validCamera ? camera : [...DEFAULT_CAMERA]};
 }
 export function serializeState(state) {
-  const params = new URLSearchParams({y: state.year, l: [state.polity && 'polity',state.technology && 'technology',state.britain && 'britain',state.migration && 'migration',state.events && 'events',state.religion && 'religion'].filter(Boolean).join(',')});
+  const params = new URLSearchParams({y: state.year, l: [state.polity && 'polity',state.technology && 'technology',state.britain && 'britain',state.migration && 'migration',state.events && 'events',state.religion && 'religion',state.cultures&&'cultures'].filter(Boolean).join(',')});
+  if(state.cultureKind&&state.cultureKind!=='all')params.set('culture',state.cultureKind);
   if(state.religionKind==='majority')params.set('rk','majority');
   if(state.compareReligion)params.set('compare','religion');
   if(state.ranking)params.set('rank','1');

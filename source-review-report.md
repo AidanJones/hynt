@@ -1,5 +1,7 @@
 # Source review follow-up — 15 November 2026
 
+**16 November update:** [The next review pass](review-pass-2026-11-16.md) adds 34 exact identity corrections and a complete reference/temporal classification ledger. [Selected culture snapshots](culture-report.md) are now separately distributed with the published GPL terms and corresponding source. The earlier withholding decision and counts below describe the previous increment. Exhaustive historical border adjudication remains open.
+
 ## Entity and border review
 
 The audit is now browsable at `atlas/review.html`: search aliases, concurrent source records and the largest spatial overlaps retained at the ten sampled years; each entry opens the relevant year/entity in the atlas. Original IDs remain visible. These are diagnostics, not automatic historical corrections. Full annual or expert border adjudication is not claimed.

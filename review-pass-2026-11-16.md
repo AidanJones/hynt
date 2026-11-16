@@ -1,0 +1,11 @@
+# Identity and temporal review — 16 November 2026
+
+The reference ledger checks 321 source labels against 190 cited Wikipedia articles, preserving article revision IDs, redirects, disambiguation and input hashes. The initial 318-label baseline contained 53 article-ID conflicts; three supplemental labels reuse already fetched references. Each original conflict has a case-specific disposition in `pipeline/curated/identity-review.json`.
+
+Thirty-three of the initial conflicts support exact corrections; twenty retain their source IDs because the article describes a city, person, people, aggregate, different period or ambiguous continuity. A supplemental Southern Liang check distinguishes the 397–414 state from the 502–557 Liang dynasty using the cited Harvard dynasty chronology. This adds 34 corrections to the previous four, for 38 exact crosswalk rules. Original identifiers and, where changed, original article names remain available. Reference identity does not independently validate borders or historical continuity.
+
+The refresh changes identity grouping on 315 records. All 13,412 original geometries and source/viewer intervals remain identical to commit `5440b55`, checked by canonical SHA-256 in `pipeline/reviews/geometry-preservation.json`. Derived indices now contain 1,444 entities, 112 alias sets and 1,525 same-entity temporal pairs.
+
+All current temporal pairs are mechanically classified as identical, separate or overlapping footprints. These classes help distinguish duplicate geometry, components and intersections; their historical status remains explicitly unadjudicated. The review page offers reference/disposition and geometry filters, pinned article links and map links. The Roman 117 CE interpretation note adds cited context for the Trajan/Hadrian transition and the later construction of Hadrian's Wall. Existing Mongol and British aggregate notes remain.
+
+This completes the reference-led correction pass, not exhaustive scholarly border adjudication. Remaining ambiguous continuity and spatial-control questions stay in the open border-review task. No shapes have been deleted or territorial control inferred solely from overlap. `python -m pipeline.review_pack` regenerates the public review ledger offline; `python -m pipeline.reconcile` also refreshes identities and derived layers.

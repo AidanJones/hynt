@@ -1,4 +1,42 @@
 [
-  {"entity":"Q12557","from":1260,"to":1400,"text":"Composite source label: by the 1260s Mongol rule had fragmented into connected but separate khanates. This shape preserves Cliopatria’s aggregate label/extent; it must not be read as proof of uniform central government in 1280. No replacement boundary has been invented.","sources":[{"title":"Royal Armouries · Fall of an Empire","url":"https://royalarmouries.org/objects-and-stories/stories/the-mongols/fall-of-an-empire"}]},
-  {"entity":"Q8680","from":1900,"to":1931,"text":"The source can show aggregate imperial extents alongside colonial or dominion records. Overlapping aggregate and component shapes are not additive: summing their areas would double-count land. These shapes do not imply equal political status or identical forms of control.","sources":[{"title":"The National Archives · The Imperial Conference 1926 and the origins of the Commonwealth","url":"https://www.nationalarchives.gov.uk/explore-the-collection/stories/the-imperial-conference-1926-and-the-origins-of-the-commonwealth-of-nations/"}]}
+  {
+    "entity": "Q12557",
+    "from": 1260,
+    "to": 1400,
+    "text": "Composite source label: by the 1260s Mongol rule had fragmented into connected but separate khanates. This shape preserves Cliopatria’s aggregate label/extent; it must not be read as proof of uniform central government in 1280. No replacement boundary has been invented.",
+    "sources": [
+      {
+        "title": "Royal Armouries · Fall of an Empire",
+        "url": "https://royalarmouries.org/objects-and-stories/stories/the-mongols/fall-of-an-empire"
+      }
+    ]
+  },
+  {
+    "entity": "Q8680",
+    "from": 1900,
+    "to": 1931,
+    "text": "The source can show aggregate imperial extents alongside colonial or dominion records. Overlapping aggregate and component shapes are not additive: summing their areas would double-count land. These shapes do not imply equal political status or identical forms of control.",
+    "sources": [
+      {
+        "title": "The National Archives · The Imperial Conference 1926 and the origins of the Commonwealth",
+        "url": "https://www.nationalarchives.gov.uk/explore-the-collection/stories/the-imperial-conference-1926-and-the-origins-of-the-commonwealth-of-nations/"
+      }
+    ]
+  },
+  {
+    "entity": "Q2277",
+    "from": 117,
+    "to": 118,
+    "text": "117 CE is a transition year between Trajan and Hadrian. Eastern conquests were short-lived and many were abandoned under Hadrian; an annual source outline cannot show the changing phases of occupation, revolt and withdrawal. The later Hadrian’s Wall began in 122 and must not be read as a surveyed border for 117. No replacement border has been invented.",
+    "sources": [
+      {
+        "title": "Trajan’s Parthian War, 113–117 · The Encyclopedia of Ancient Battles",
+        "url": "https://doi.org/10.1002/9781119099000.wbabat0650"
+      },
+      {
+        "title": "English Heritage · Hadrian’s Wall facts and FAQs",
+        "url": "https://www.english-heritage.org.uk/faqs-hadrians-wall/"
+      }
+    ]
+  }
 ]

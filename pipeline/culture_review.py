@@ -1,4 +1,4 @@
-"""Inspect pinned candidate snapshots without redistributing cultural polygons."""
+"""Audit candidate snapshots separately from the explicitly curated culture import."""
 import hashlib,json,urllib.request
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -18,11 +18,11 @@ def main():
         rows.append({'year':year,'filename':name,'url':BASE+'geojson/'+name,'sha256':hashlib.sha256(content).hexdigest(),
                      'features':len(props),'fields':sorted({k for p in props for k in p}), 'names':names,
                      'has_feature_source_fields':sum(any('source' in k.lower() or 'citation' in k.lower() for k in p) for p in props),
-                     'nonempty_weblinks':sum(bool(p.get('weblinks')) for p in props)})
+                     'nonempty_weblinks':sum(any(p.get(k) for k in ['weblinks','weblnks']) for p in props)})
         print(f'Reviewed {name}: {len(props)} features',flush=True)
-    output={'revision':REVISION,'reviewed':'2026-11-15','status':'not imported',
+    output={'revision':REVISION,'reviewed':'2026-11-16','status':'only the separately curated selection is imported',
             'upstream_licence_question':'https://github.com/aourednik/historical-basemaps/issues/74',
-            'decision':'Do not ship this candidate import yet. Review unresolved data-licence scope, feature-specific sources and anachronistic/mixed culture-language-taxonomic labels. Repository GPL listing alone is not a completed provenance review.',
+            'decision':'Selected contextualized archaeological records are packaged under the repository’s published GPL-3.0 terms with licence and corresponding source. The rest of these candidate snapshots remain excluded. The upstream licence-clarification issue is recorded, not treated as confirmation of a different licence. Numerical border precision is not historical confidence.',
             'snapshots':rows}
     target=ROOT/'pipeline/reviews';target.mkdir(exist_ok=True)
     (target/'historical-basemaps.json').write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

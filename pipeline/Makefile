@@ -1,4 +1,4 @@
-.PHONY: data test technologies technology-regions britain migrations audit
+.PHONY: data test technologies technology-regions britain migrations audit cultures
 data:
 	python -m pipeline.build
 test:
@@ -13,3 +13,5 @@ migrations:
 	python -m pipeline.migrations
 audit:
 	python -m pipeline.audit
+cultures:
+	python -m pipeline.cultures

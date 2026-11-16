@@ -1,5 +1,13 @@
 # First-increment verification
 
+## Selected cultures and identity review — 16 November 2026
+
+**75 Python and 31 Node tests passed.** The culture and review-page browser checks pass on desktop and phone-size layouts, with screenshots inspected. They exercise rendered culture polygons, references and licence links, half-open date windows, share state, corrected identity details, review filters, keyboard stepping and mobile controls. The physical-device harness also passed its desktop regression and deployed CI; that is not a physical-phone result.
+
+The identity refresh preserves all 13,412 polity geometries and source/viewer intervals byte-for-byte after canonical serialization against commit `5440b55`; the checked digest is in `pipeline/reviews/geometry-preservation.json`. Thirty-four further exact identity corrections affect 315 source records. Reference checks and temporal geometry classes are reproducible diagnostics, not exhaustive scholarly border adjudication. See [the review report](review-pass-2026-11-16.md) and [culture provenance](culture-report.md). Physical-phone evidence remains pending.
+
+Existing polity/Britain/technology, deep-time, audit, cross-era race/corrupt-download recovery, regional technology, campaign/event, religion-comparison and ranking/filter browser suites also passed sequentially after the changes. The static viewer is 14.01 MB, within its 15 MB budget; optional culture data remains lazy-loaded.
+
 ## Expanded atlas milestones and source review — 15 November 2026
 
 **62 Python and 29 Node tests passed.** New browser suites passed regional technology coverage, independently dated 1066 campaigns/events, the 476 Italy relation, synchronized religion comparison, the observation-year-only 2011 majority record, territorial rankings, lifespan charts, geographic/confidence filters, source-review search, corrected identities, keyboard stepping and mobile control visibility. Desktop/mobile screenshots were inspected. Existing polity/Britain/technology, deep-time, audit and cross-era retry suites also passed after these additions.

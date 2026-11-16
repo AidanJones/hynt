@@ -4,6 +4,8 @@ Application code: repository MIT licence. Data licences are separate.
 
 ## Distributed
 
+- **Selected historical-basemaps culture snapshots:** André Ourednik and contributors, revision `4b5039e50d8d2464b065bd76ad6086cd4597108d`, GPL-3.0-only under the repository's published terms. Full licence, corresponding selected original features and transformation notice are bundled in `atlas/data/cultures/`. See `culture-report.md` for selection, changes and the still-open upstream clarification issue. This dataset is separate from the MIT application code.
+
 - **Events/campaigns/relations and religion observations:** original factual summaries and illustrative anchors are CC0. Linked institutional/scholarly publications retain their rights; no publication text, maps or bulk religion datasets are imported. Religion and ranking polygons derive from attributed Cliopatria CC BY 4.0. The cited Han identity crosswalk retains the original source QID and uses Wikidata CC0 facts.
 
 - **Regional technology ledger:** original evidence summaries are CC0; geographic chunks use public-domain Natural Earth land. Assignments derived from Cliopatria preserve pinned revision and original polity identifiers and are attributed CC BY 4.0. Model output is explicitly an inference, not additional source evidence. See `technology-regions-report.md`.
@@ -20,4 +22,4 @@ Application code: repository MIT licence. Data licences are separate.
 
 ## Not yet cleared or imported
 
-historical-basemaps, CShapes, AADR, DRH, ARDA, Glottolog and OpenHistoricalMap need source-version-specific redistribution and attribution review before fetching for distribution. Wikidata is CC0 but date precision, statement ranks, qualifiers and reference provenance still need handling. No licence is inferred from this document for a future import.
+CShapes, AADR, DRH, ARDA, Glottolog and OpenHistoricalMap need source-version-specific redistribution and attribution review before fetching for distribution. Further historical-basemaps features need individual archaeological review; the selected import does not clear every candidate. Wikidata is CC0 but date precision, statement ranks, qualifiers and reference provenance still need handling. No licence is inferred from this document for a future import.

@@ -1,6 +1,341 @@
 [
-  {"source_entity":"Q1068371","source_name":"Han Dynasty","source_wikipedia":"Han dynasty","entity":"Q7209","reason":"The source assigns the same QID to Han Dynasty records in ancient China and Chauhan Dynasty records in medieval South Asia. The existing Han dynasty article identifies Q7209; split this exact name/article combination while preserving the source QID. No dates or borders change.","source":"https://www.wikidata.org/wiki/Q7209"},
-  {"source_entity":"Q555994","source_name":"Lu","source_wikipedia":"Lu (state)","entity":"Q736936","reason":"The source groups ancient Chinese Lu with Aq Qoyunlu under one QID. The exact source article Lu (state) identifies Q736936. Separate that identity while retaining source QID, geometry and dates.","source":"https://www.wikidata.org/wiki/Q736936"},
-  {"source_entity":"Q423","source_name":"Republic of Korea","source_wikipedia":"South Korea","entity":"Q884","reason":"The source uses the North Korea QID for both Korean states. Its Republic of Korea / South Korea records identify Q884. Separate this exact name/article combination; borders and source dates are unchanged.","source":"https://www.wikidata.org/wiki/Q884"},
-  {"source_entity":"Q172640","source_name":"Republic of Vietnam","source_wikipedia":"South Vietnam","entity":"Q180573","reason":"The source groups South and North Vietnam under the North Vietnam QID. The exact South Vietnam article identifies Q180573. Separate the Republic of Vietnam records while preserving the source QID, intervals and shapes.","source":"https://www.wikidata.org/wiki/Q180573"}
+  {
+    "source_entity": "Q1068371",
+    "source_name": "Han Dynasty",
+    "source_wikipedia": "Han dynasty",
+    "entity": "Q7209",
+    "reason": "The source assigns the same QID to Han Dynasty records in ancient China and Chauhan Dynasty records in medieval South Asia. The existing Han dynasty article identifies Q7209; split this exact name/article combination while preserving the source QID. No dates or borders change.",
+    "source": "https://www.wikidata.org/wiki/Q7209"
+  },
+  {
+    "source_entity": "Q555994",
+    "source_name": "Lu",
+    "source_wikipedia": "Lu (state)",
+    "entity": "Q736936",
+    "reason": "The source groups ancient Chinese Lu with Aq Qoyunlu under one QID. The exact source article Lu (state) identifies Q736936. Separate that identity while retaining source QID, geometry and dates.",
+    "source": "https://www.wikidata.org/wiki/Q736936"
+  },
+  {
+    "source_entity": "Q423",
+    "source_name": "Republic of Korea",
+    "source_wikipedia": "South Korea",
+    "entity": "Q884",
+    "reason": "The source uses the North Korea QID for both Korean states. Its Republic of Korea / South Korea records identify Q884. Separate this exact name/article combination; borders and source dates are unchanged.",
+    "source": "https://www.wikidata.org/wiki/Q884"
+  },
+  {
+    "source_entity": "Q172640",
+    "source_name": "Republic of Vietnam",
+    "source_wikipedia": "South Vietnam",
+    "entity": "Q180573",
+    "reason": "The source groups South and North Vietnam under the North Vietnam QID. The exact South Vietnam article identifies Q180573. Separate the Republic of Vietnam records while preserving the source QID, intervals and shapes.",
+    "source": "https://www.wikidata.org/wiki/Q180573"
+  },
+  {
+    "source_entity": "Q1143524",
+    "source_name": "Qi",
+    "source_wikipedia": "Qi (state)",
+    "entity": "Q837855",
+    "reason": "Exact source label Qi and article Qi (state) identify Q837855, rather than the shared upstream Q1143524. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q837855",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385686597"
+  },
+  {
+    "source_entity": "Q121932",
+    "source_name": "Republic of Bulgaria",
+    "source_wikipedia": "Bulgaria",
+    "entity": "Q219",
+    "reason": "Exact source label Republic of Bulgaria and article Bulgaria identify Q219, rather than the shared upstream Q121932. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q219",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384993025"
+  },
+  {
+    "source_entity": "Q12536",
+    "source_name": "Buyid Dynasty",
+    "source_wikipedia": "Buyid dynasty",
+    "entity": "Q273874",
+    "reason": "Exact source label Buyid Dynasty and article Buyid dynasty identify Q273874, rather than the shared upstream Q12536. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q273874",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1380225647"
+  },
+  {
+    "source_entity": "Q12544",
+    "source_name": "Roman Empire",
+    "source_wikipedia": "Roman Empire",
+    "entity": "Q2277",
+    "reason": "Exact source label Roman Empire and article Roman Empire identify Q2277, rather than the shared upstream Q12544. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q2277",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384384120"
+  },
+  {
+    "source_entity": "Q139708",
+    "source_name": "Lebanon",
+    "source_wikipedia": "Lebanon",
+    "entity": "Q822",
+    "reason": "Exact source label Lebanon and article Lebanon identify Q822, rather than the shared upstream Q139708. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q822",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385936163"
+  },
+  {
+    "source_entity": "Q1471995",
+    "source_name": "Qin",
+    "source_wikipedia": "Qin (state)",
+    "entity": "Q34756",
+    "reason": "Exact source label Qin and article Qin (state) identify Q34756, rather than the shared upstream Q1471995. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q34756",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1383337722"
+  },
+  {
+    "source_entity": "Q1472004",
+    "source_name": "Yan",
+    "source_wikipedia": "Yan (state)",
+    "entity": "Q1055713",
+    "reason": "Exact source label Yan and article Yan (state) identify Q1055713, rather than the shared upstream Q1472004. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q1055713",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385483015"
+  },
+  {
+    "source_entity": "Q1574107",
+    "source_name": "Zhao",
+    "source_wikipedia": "Zhao (state)",
+    "entity": "Q197430",
+    "reason": "Exact source label Zhao and article Zhao (state) identify Q197430, rather than the shared upstream Q1574107. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q197430",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1340073056"
+  },
+  {
+    "source_entity": "Q1661685",
+    "source_name": "Sasanian Empire",
+    "source_wikipedia": "Sasanian Empire",
+    "entity": "Q83891",
+    "reason": "Exact source label Sasanian Empire and article Sasanian Empire identify Q83891, rather than the shared upstream Q1661685. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q83891",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1383855796"
+  },
+  {
+    "source_entity": "Q175881",
+    "source_name": "Roman Republic",
+    "source_wikipedia": "Roman Republic",
+    "entity": "Q17167",
+    "reason": "Exact source label Roman Republic and article Roman Republic identify Q17167, rather than the shared upstream Q175881. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q17167",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384318806"
+  },
+  {
+    "source_entity": "Q188712",
+    "source_name": "Japan",
+    "source_wikipedia": "Japan",
+    "entity": "Q17",
+    "reason": "Exact source label Japan and article Japan identify Q17, rather than the shared upstream Q188712. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q17",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385578806"
+  },
+  {
+    "source_entity": "Q1936158",
+    "source_name": "Yue",
+    "source_wikipedia": "Yue (state)",
+    "entity": "Q1137403",
+    "reason": "Exact source label Yue and article Yue (state) identify Q1137403, rather than the shared upstream Q1936158. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q1137403",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1383829624"
+  },
+  {
+    "source_entity": "Q199841",
+    "source_name": "Republic of Yemen",
+    "source_wikipedia": "Yemen",
+    "entity": "Q805",
+    "reason": "Exact source label Republic of Yemen and article Yemen identify Q805, rather than the shared upstream Q199841. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q805",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384219999"
+  },
+  {
+    "source_entity": "Q203493",
+    "source_name": "Romania",
+    "source_wikipedia": "Romania",
+    "entity": "Q218",
+    "reason": "Exact source label Romania and article Romania identify Q218, rather than the shared upstream Q203493. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q218",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384695561"
+  },
+  {
+    "source_entity": "Q204077",
+    "source_name": "Cao",
+    "source_wikipedia": "Cao (state)",
+    "entity": "Q284964",
+    "reason": "Exact source label Cao and article Cao (state) identify Q284964, rather than the shared upstream Q204077. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q284964",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1318415555"
+  },
+  {
+    "source_entity": "Q2719360",
+    "source_name": "Luxembourg",
+    "source_wikipedia": "Luxembourg",
+    "entity": "Q32",
+    "reason": "Exact source label Luxembourg and article Luxembourg identify Q32, rather than the shared upstream Q2719360. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q32",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385567029"
+  },
+  {
+    "source_entity": "Q274488",
+    "source_name": "Wu",
+    "source_wikipedia": "Wu (state)",
+    "entity": "Q912068",
+    "reason": "Exact source label Wu and article Wu (state) identify Q912068, rather than the shared upstream Q274488. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q912068",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1383830318"
+  },
+  {
+    "source_entity": "Q28405",
+    "source_name": "Joseon",
+    "source_wikipedia": "Joseon",
+    "entity": "Q28179",
+    "reason": "Exact source label Joseon and article Joseon identify Q28179, rather than the shared upstream Q28405. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q28179",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1383784385"
+  },
+  {
+    "source_entity": "Q28513",
+    "source_name": "Hungary",
+    "source_wikipedia": "Hungary",
+    "entity": "Q28",
+    "reason": "Exact source label Hungary and article Hungary identify Q28, rather than the shared upstream Q28513. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q28",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385113512"
+  },
+  {
+    "source_entity": "Q320930",
+    "source_name": "Wei",
+    "source_wikipedia": "Wei (state)",
+    "entity": "Q912052",
+    "reason": "Exact source label Wei and article Wei (state) identify Q912052, rather than the shared upstream Q320930. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q912052",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384281264"
+  },
+  {
+    "source_entity": "Q33946",
+    "source_name": "Slovakia",
+    "source_wikipedia": "Slovakia",
+    "entity": "Q214",
+    "reason": "Exact source label Slovakia and article Slovakia identify Q214, rather than the shared upstream Q33946. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q214",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1383174242"
+  },
+  {
+    "source_entity": "Q350186",
+    "source_name": "Denmark",
+    "source_wikipedia": "Denmark",
+    "entity": "Q35",
+    "reason": "Exact source label Denmark and article Denmark identify Q35, rather than the shared upstream Q350186. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q35",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384469435"
+  },
+  {
+    "source_entity": "Q41137",
+    "source_name": "Syria",
+    "source_wikipedia": "Syria",
+    "entity": "Q858",
+    "reason": "Exact source label Syria and article Syria identify Q858, rather than the shared upstream Q41137. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q858",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385824209"
+  },
+  {
+    "source_entity": "Q4186404",
+    "source_name": "Later Western Liang",
+    "source_wikipedia": "Western Liang (555–587)",
+    "entity": "Q849770",
+    "reason": "Exact source label Later Western Liang and article Western Liang (555–587) identify Q849770, rather than the shared upstream Q4186404. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q849770",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1382360391"
+  },
+  {
+    "source_entity": "Q4186404",
+    "source_name": "Western Liang",
+    "source_wikipedia": "Western Liang (Sixteen Kingdoms)",
+    "entity": "Q994451",
+    "reason": "Exact source label Western Liang and article Western Liang (Sixteen Kingdoms) identify Q994451, rather than the shared upstream Q4186404. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q994451",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1360702891"
+  },
+  {
+    "source_entity": "Q467864",
+    "source_name": "Republic of Albania",
+    "source_wikipedia": "Albania",
+    "entity": "Q222",
+    "reason": "Exact source label Republic of Albania and article Albania identify Q222, rather than the shared upstream Q467864. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q222",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385975854"
+  },
+  {
+    "source_entity": "Q5062192",
+    "source_name": "Mexico",
+    "source_wikipedia": "Mexico",
+    "entity": "Q96",
+    "reason": "Exact source label Mexico and article Mexico identify Q96, rather than the shared upstream Q5062192. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q96",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385499064"
+  },
+  {
+    "source_entity": "Q598570",
+    "source_name": "Ukraine",
+    "source_wikipedia": "Ukraine",
+    "entity": "Q212",
+    "reason": "Exact source label Ukraine and article Ukraine identify Q212, rather than the shared upstream Q598570. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q212",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1385208337"
+  },
+  {
+    "source_entity": "Q6201794",
+    "source_name": "Jin",
+    "source_wikipedia": "Jin (Chinese state)",
+    "entity": "Q912043",
+    "reason": "Exact source label Jin and article Jin (Chinese state) identify Q912043, rather than the shared upstream Q6201794. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q912043",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1355681775"
+  },
+  {
+    "source_entity": "Q7462",
+    "source_name": "Song",
+    "source_wikipedia": "Song (state)",
+    "entity": "Q1065073",
+    "reason": "Exact source label Song and article Song (state) identify Q1065073, rather than the shared upstream Q7462. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q1065073",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1359634784"
+  },
+  {
+    "source_entity": "Q783489",
+    "source_name": "Liang Dynasty",
+    "source_wikipedia": "Liang dynasty",
+    "entity": "Q1069868",
+    "reason": "Exact source label Liang Dynasty and article Liang dynasty identify Q1069868, rather than the shared upstream Q783489. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q1069868",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1375279227"
+  },
+  {
+    "source_entity": "Q974",
+    "source_name": "Republic of the Congo",
+    "source_wikipedia": "Republic of the Congo",
+    "entity": "Q971",
+    "reason": "Exact source label Republic of the Congo and article Republic of the Congo identify Q971, rather than the shared upstream Q974. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q971",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384752533"
+  },
+  {
+    "source_entity": "Q983",
+    "source_name": "Guinea",
+    "source_wikipedia": "Guinea",
+    "entity": "Q1006",
+    "reason": "Exact source label Guinea and article Guinea identify Q1006, rather than the shared upstream Q983. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+    "source": "https://www.wikidata.org/wiki/Q1006",
+    "article_reference": "https://en.wikipedia.org/w/index.php?oldid=1384981775"
+  },
+  {
+    "source_entity": "Q1069868",
+    "source_name": "Southern Liang",
+    "source_wikipedia": "Liang dynasty",
+    "entity": "Q1330290",
+    "wikipedia": "Southern Liang (Sixteen Kingdoms)",
+    "reason": "The source records Southern Liang in 397–414 with the ID and article for the separate Liang dynasty of 502–557. Independent dynasty chronologies distinguish these states. Correct the identity and further-reading link while preserving the original QID, article, dates and geometry.",
+    "source": "https://www.wikidata.org/wiki/Q1330290",
+    "article_reference": "https://courses.edx.org/asset-v1%3AHarvardX%2BSW12.8x%2B2016%2Btype%40asset%2Bblock/List_of_Dynasties.pdf"
+  }
 ]

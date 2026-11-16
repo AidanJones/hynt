@@ -1,0 +1,25 @@
+{
+  "revision":"4b5039e50d8d2464b065bd76ad6086cd4597108d",
+  "licence":"GPL-3.0-only",
+  "coverage_from":-10000,
+  "coverage_to":-3400,
+  "selection":[
+    {"id":"jomon-10000","name":"Jōmon · partial source footprint","source_name":"Jōmon","snapshot":-10000,"source_index":14,"to":-8000,"entity":"culture:jomon","colour":"#537e99","references":["jomon-official","unesco-jomon"],"summary":"The snapshot marks a selected part of southwestern and central Japan. It omits documented northern Jōmon sites and must not be treated as the full distribution of Jōmon traditions."},
+    {"id":"jomon-8000","name":"Jōmon · partial source footprint","source_name":"Jōmon","snapshot":-8000,"source_index":14,"to":-5000,"entity":"culture:jomon","colour":"#537e99","references":["jomon-official","unesco-jomon"],"summary":"A partial source reconstruction, not a boundary of a uniform people. The scholarly references support the archaeological tradition and broad period, not every vertex of this outline."},
+    {"id":"jomon-5000","name":"Jōmon · partial source footprint","source_name":"Jōmon","snapshot":-5000,"source_index":11,"to":-4000,"entity":"culture:jomon","colour":"#537e99","references":["jomon-official","unesco-jomon"],"summary":"The source footprint is incomplete, notably omitting northern sites. Archaeological culture, language and genetic ancestry are distinct concepts; this is an archaeological classification only."},
+    {"id":"jomon-4000","name":"Jōmon · partial source footprint","source_name":"Jōmon","snapshot":-4000,"source_index":13,"to":-3400,"entity":"culture:jomon","colour":"#537e99","references":["jomon-official","unesco-jomon"],"summary":"The display stops at this import’s 3400 BCE coverage boundary. That is not the end of Jōmon traditions, which continued much later. The mapped footprint remains a partial upstream interpretation."},
+    {"id":"ubaid-5000","name":"Ubaid · selected Mesopotamian footprint","source_name":"Ubaid","snapshot":-5000,"source_index":120,"to":-4000,"entity":"culture:ubaid","colour":"#9a8048","references":["met-ubaid"],"summary":"A selected southern Mesopotamian reconstruction at 5000 BCE. Ubaid material traditions extended beyond this outline, including northern Mesopotamia and the Gulf. Shared pottery does not establish one state or population."},
+    {"id":"narva-5000","name":"Narva-type pottery · selected Baltic footprint","source_name":"Narva","snapshot":-5000,"source_index":275,"to":-4000,"entity":"culture:narva","colour":"#6d8971","references":["saag-narva"],"summary":"The date lies within the cited Narva stage in Estonia (c.5200–3900 BCE). The larger Baltic outline is the map author’s reconstruction, not an independently surveyed frontier. Period terms and chronology vary regionally."}
+  ],
+  "references":{
+    "jomon-official":{"title":"About the Jomon period","author":"Jomon Prehistoric Sites in Northern Japan · official site","url":"https://jomon-japan.jp/en/learn/jomon-culture","locator":"Beginning of the Jōmon period, approximately 13,000 BCE; pottery and sedentary hunter-fisher-gatherer traditions."},
+    "unesco-jomon":{"title":"Jomon Prehistoric Sites in Northern Japan","author":"UNESCO World Heritage Centre","url":"https://whc.unesco.org/en/list/1632/","locator":"Serial northern sites and broad archaeological period c.13,000–400 BCE. These northern sites demonstrate that the imported southern footprint is incomplete."},
+    "met-ubaid":{"title":"The Ubaid Period (5500–4000 B.C.)","author":"Department of Ancient Near Eastern Art, Metropolitan Museum of Art, 2003","url":"https://www.metmuseum.org/essays/the-ubaid-period-5500-4000-b-c","locator":"Ubaid material culture in southern Mesopotamia, spread north and pottery along the Persian Gulf. Independent context; not the source of the imported polygon."},
+    "saag-narva":{"title":"The prehistory of Estonia from a genetic perspective: new insights from ancient DNA","author":"Lehti Saag, University of Tartu, 2019","url":"https://dspace.ut.ee/items/c890d61d-6be7-415e-a930-c5c77c2df930","locator":"Table 1, page 29: Narva stage 5200–3900 BCE in Estonia. Only archaeological chronology is used; no genetic ancestry is inferred for the polygon."}
+  },
+  "excluded":[
+    {"name":"Funnel-Beaker at 5000 BCE","reason":"Candidate chronology/extent requires further review; do not silently carry an early snapshot into a supported date."},
+    {"name":"Bantu at 8000 BCE","reason":"Language/population label with unsupported chronology for an archaeological-culture polygon."},
+    {"name":"123000 BCE hominin polygons","reason":"Taxonomic range reconstructions are not archaeological cultures and have insufficient feature-specific provenance for this import."}
+  ]
+}

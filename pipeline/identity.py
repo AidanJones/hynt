@@ -5,14 +5,17 @@ CROSSWALK=json.loads((Path(__file__).resolve().parent/'curated/entity-crosswalk.
 def apply_identity(properties):
     p=dict(properties)
     original=p.get('source_wikidata',p.get('wikidata',''))
+    original_article=p.get('source_wikipedia',p.get('wikipedia',''))
     if 'source_wikidata' in p:
         p.update(entity=original,wikidata=original)
         for key in ['source_wikidata','identity_note','identity_source']:p.pop(key,None)
-    matches=[r for r in CROSSWALK if r['source_entity']==original and r['source_name']==p['name'] and r['source_wikipedia']==p.get('wikipedia','')]
+    if 'source_wikipedia' in p:p['wikipedia']=p.pop('source_wikipedia')
+    matches=[r for r in CROSSWALK if r['source_entity']==original and r['source_name']==p['name'] and r['source_wikipedia']==original_article]
     assert len(matches)<=1,'Ambiguous curated identity selector'
     if matches:
         r=matches[0]
         p.update(entity=r['entity'],wikidata=r['entity'],source_wikidata=original,identity_note=r['reason'],identity_source=r['source'])
+        if r.get('wikipedia'):p.update(source_wikipedia=original_article,wikipedia=r['wikipedia'])
     return p
 
 

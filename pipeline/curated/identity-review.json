@@ -1,0 +1,491 @@
+{
+  "reviewed": "2026-11-16",
+  "decisions": [
+    {
+      "source_entity": "Q1143524",
+      "source_name": "Qi",
+      "source_article": "Qi (state)",
+      "proposed_entity": "Q837855",
+      "decision": "corrected",
+      "reason": "Exact source label Qi and article Qi (state) identify Q837855, rather than the shared upstream Q1143524. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385686597"
+    },
+    {
+      "source_entity": "Q121932",
+      "source_name": "Republic of Bulgaria",
+      "source_article": "Bulgaria",
+      "proposed_entity": "Q219",
+      "decision": "corrected",
+      "reason": "Exact source label Republic of Bulgaria and article Bulgaria identify Q219, rather than the shared upstream Q121932. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384993025"
+    },
+    {
+      "source_entity": "Q12536",
+      "source_name": "Buyid Dynasty",
+      "source_article": "Buyid dynasty",
+      "proposed_entity": "Q273874",
+      "decision": "corrected",
+      "reason": "Exact source label Buyid Dynasty and article Buyid dynasty identify Q273874, rather than the shared upstream Q12536. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1380225647"
+    },
+    {
+      "source_entity": "Q12544",
+      "source_name": "Roman Empire",
+      "source_article": "Roman Empire",
+      "proposed_entity": "Q2277",
+      "decision": "corrected",
+      "reason": "Exact source label Roman Empire and article Roman Empire identify Q2277, rather than the shared upstream Q12544. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384384120"
+    },
+    {
+      "source_entity": "Q1311990",
+      "source_name": "Principality of Serbia",
+      "source_article": "Principality of Serbia",
+      "proposed_entity": "Q684030",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source interval is early medieval (768–961), while the generic article resolves to the modern principality. Neither changing it to that modern ID nor retaining a medieval-grand-principality interpretation is independently established by this link.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384475228"
+    },
+    {
+      "source_entity": "Q1311990",
+      "source_name": "Serbia",
+      "source_article": "Serbia",
+      "proposed_entity": "Q403",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The 1918 source footprint is a wartime/postwar remnant. A general article about the present country is not sufficient to assign the precise historical polity and succession.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385692937"
+    },
+    {
+      "source_entity": "Q13590051",
+      "source_name": "Burgundians",
+      "source_article": "Burgundians",
+      "proposed_entity": "Q150412",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The article denotes a people; the source is typed as a polity footprint. Replacing a kingdom identity with a people identity would change the ontology without evidence about what the polygon represents.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384141985"
+    },
+    {
+      "source_entity": "Q139708",
+      "source_name": "Lebanon",
+      "source_article": "Lebanon",
+      "proposed_entity": "Q822",
+      "decision": "corrected",
+      "reason": "Exact source label Lebanon and article Lebanon identify Q822, rather than the shared upstream Q139708. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385936163"
+    },
+    {
+      "source_entity": "Q146246",
+      "source_name": "(Carolingian Empire)",
+      "source_article": "West Francia",
+      "proposed_entity": "Q46370",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source label is an imperial aggregate while its article names West Francia. The label, broad mapped extent and article disagree; the successor article alone does not identify this whole polygon.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1382135138"
+    },
+    {
+      "source_entity": "Q1471995",
+      "source_name": "Qin",
+      "source_article": "Qin (state)",
+      "proposed_entity": "Q34756",
+      "decision": "corrected",
+      "reason": "Exact source label Qin and article Qin (state) identify Q34756, rather than the shared upstream Q1471995. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1383337722"
+    },
+    {
+      "source_entity": "Q1472004",
+      "source_name": "Yan",
+      "source_article": "Eighteen Kingdoms",
+      "proposed_entity": "Q5349053",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The linked Eighteen Kingdoms article is an aggregate, not the individual Yan state. A period-level ID cannot replace a polity ID without specific evidence.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1378044456"
+    },
+    {
+      "source_entity": "Q1472004",
+      "source_name": "Yan",
+      "source_article": "Yan (state)",
+      "proposed_entity": "Q1055713",
+      "decision": "corrected",
+      "reason": "Exact source label Yan and article Yan (state) identify Q1055713, rather than the shared upstream Q1472004. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385483015"
+    },
+    {
+      "source_entity": "Q148",
+      "source_name": "Republic of China",
+      "source_article": "Republic of China (1912-1949)",
+      "proposed_entity": "Q13426199",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source spans 1912–2024, but its article is specifically the mainland Republic of China of 1912–1949. A single blanket replacement would also change later Taiwan/claim records. Date-qualified historical scope must be resolved first.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385975645"
+    },
+    {
+      "source_entity": "Q1574107",
+      "source_name": "Zhao",
+      "source_article": "Zhao (state)",
+      "proposed_entity": "Q197430",
+      "decision": "corrected",
+      "reason": "Exact source label Zhao and article Zhao (state) identify Q197430, rather than the shared upstream Q1574107. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1340073056"
+    },
+    {
+      "source_entity": "Q1661685",
+      "source_name": "Sasanian Empire",
+      "source_article": "Sasanian Empire",
+      "proposed_entity": "Q83891",
+      "decision": "corrected",
+      "reason": "Exact source label Sasanian Empire and article Sasanian Empire identify Q83891, rather than the shared upstream Q1661685. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1383855796"
+    },
+    {
+      "source_entity": "Q175881",
+      "source_name": "Roman Republic",
+      "source_article": "Roman Republic",
+      "proposed_entity": "Q17167",
+      "decision": "corrected",
+      "reason": "Exact source label Roman Republic and article Roman Republic identify Q17167, rather than the shared upstream Q175881. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384318806"
+    },
+    {
+      "source_entity": "Q188712",
+      "source_name": "Japan",
+      "source_article": "Japan",
+      "proposed_entity": "Q17",
+      "decision": "corrected",
+      "reason": "Exact source label Japan and article Japan identify Q17, rather than the shared upstream Q188712. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385578806"
+    },
+    {
+      "source_entity": "Q1936158",
+      "source_name": "Yue",
+      "source_article": "Yue (state)",
+      "proposed_entity": "Q1137403",
+      "decision": "corrected",
+      "reason": "Exact source label Yue and article Yue (state) identify Q1137403, rather than the shared upstream Q1936158. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1383829624"
+    },
+    {
+      "source_entity": "Q199841",
+      "source_name": "Republic of Yemen",
+      "source_article": "Yemen",
+      "proposed_entity": "Q805",
+      "decision": "corrected",
+      "reason": "Exact source label Republic of Yemen and article Yemen identify Q805, rather than the shared upstream Q199841. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384219999"
+    },
+    {
+      "source_entity": "Q2006756",
+      "source_name": "Haiti",
+      "source_article": "Haiti",
+      "proposed_entity": "Q790",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source range is 1792–1802, before independence, and may represent revolutionary control. The present-country article does not justify treating this as the modern state or the later empire.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385519348"
+    },
+    {
+      "source_entity": "Q203493",
+      "source_name": "Romania",
+      "source_article": "Romania",
+      "proposed_entity": "Q218",
+      "decision": "corrected",
+      "reason": "Exact source label Romania and article Romania identify Q218, rather than the shared upstream Q203493. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384695561"
+    },
+    {
+      "source_entity": "Q204077",
+      "source_name": "Cao",
+      "source_article": "Cao (state)",
+      "proposed_entity": "Q284964",
+      "decision": "corrected",
+      "reason": "Exact source label Cao and article Cao (state) identify Q284964, rather than the shared upstream Q204077. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1318415555"
+    },
+    {
+      "source_entity": "Q207162",
+      "source_name": "(Kingdom of France)",
+      "source_article": "Kingdom of France",
+      "proposed_entity": "Q70972",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source range spans medieval and early-modern dynasties. Choosing between a broad kingdom identity and the narrower Bourbon/dynastic identity is a historical-continuity decision, not an established typo.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384848956"
+    },
+    {
+      "source_entity": "Q207162",
+      "source_name": "Kingdom of France",
+      "source_article": "Kingdom of France",
+      "proposed_entity": "Q70972",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source range spans medieval and early-modern dynasties. A general kingdom article alone does not settle whether these source records intentionally use the narrower dynastic identity.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384848956"
+    },
+    {
+      "source_entity": "Q269109",
+      "source_name": "Ryazan",
+      "source_article": "Ryazan",
+      "proposed_entity": "Q2746",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The article resolves to the city. The source polygon represents a principality; retain the principality identity rather than substitute a city ID.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385689774"
+    },
+    {
+      "source_entity": "Q2719360",
+      "source_name": "Luxembourg",
+      "source_article": "Luxembourg",
+      "proposed_entity": "Q32",
+      "decision": "corrected",
+      "reason": "Exact source label Luxembourg and article Luxembourg identify Q32, rather than the shared upstream Q2719360. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385567029"
+    },
+    {
+      "source_entity": "Q274488",
+      "source_name": "Wu",
+      "source_article": "Wu (state)",
+      "proposed_entity": "Q912068",
+      "decision": "corrected",
+      "reason": "Exact source label Wu and article Wu (state) identify Q912068, rather than the shared upstream Q274488. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1383830318"
+    },
+    {
+      "source_entity": "Q28405",
+      "source_name": "Joseon",
+      "source_article": "Joseon",
+      "proposed_entity": "Q28179",
+      "decision": "corrected",
+      "reason": "Exact source label Joseon and article Joseon identify Q28179, rather than the shared upstream Q28405. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1383784385"
+    },
+    {
+      "source_entity": "Q28513",
+      "source_name": "Hungary",
+      "source_article": "Hungary",
+      "proposed_entity": "Q28",
+      "decision": "corrected",
+      "reason": "Exact source label Hungary and article Hungary identify Q28, rather than the shared upstream Q28513. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385113512"
+    },
+    {
+      "source_entity": "Q320930",
+      "source_name": "Wei",
+      "source_article": "Eighteen Kingdoms",
+      "proposed_entity": "Q5349053",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The linked Eighteen Kingdoms article is an aggregate, not the individual Wei state. A period-level ID cannot replace a polity ID without specific evidence.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1378044456"
+    },
+    {
+      "source_entity": "Q320930",
+      "source_name": "Wei",
+      "source_article": "Wei (state)",
+      "proposed_entity": "Q912052",
+      "decision": "corrected",
+      "reason": "Exact source label Wei and article Wei (state) identify Q912052, rather than the shared upstream Q320930. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384281264"
+    },
+    {
+      "source_entity": "Q33946",
+      "source_name": "Slovakia",
+      "source_article": "Slovakia",
+      "proposed_entity": "Q214",
+      "decision": "corrected",
+      "reason": "Exact source label Slovakia and article Slovakia identify Q214, rather than the shared upstream Q33946. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1383174242"
+    },
+    {
+      "source_entity": "Q350186",
+      "source_name": "Denmark",
+      "source_article": "Denmark",
+      "proposed_entity": "Q35",
+      "decision": "corrected",
+      "reason": "Exact source label Denmark and article Denmark identify Q35, rather than the shared upstream Q350186. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384469435"
+    },
+    {
+      "source_entity": "Q41137",
+      "source_name": "Syria",
+      "source_article": "Syria",
+      "proposed_entity": "Q858",
+      "decision": "corrected",
+      "reason": "Exact source label Syria and article Syria identify Q858, rather than the shared upstream Q41137. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385824209"
+    },
+    {
+      "source_entity": "Q4186404",
+      "source_name": "Later Western Liang",
+      "source_article": "Western Liang (555–587)",
+      "proposed_entity": "Q849770",
+      "decision": "corrected",
+      "reason": "Exact source label Later Western Liang and article Western Liang (555–587) identify Q849770, rather than the shared upstream Q4186404. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1382360391"
+    },
+    {
+      "source_entity": "Q4186404",
+      "source_name": "Western Liang",
+      "source_article": "Western Liang (Sixteen Kingdoms)",
+      "proposed_entity": "Q994451",
+      "decision": "corrected",
+      "reason": "Exact source label Western Liang and article Western Liang (Sixteen Kingdoms) identify Q994451, rather than the shared upstream Q4186404. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1360702891"
+    },
+    {
+      "source_entity": "Q467864",
+      "source_name": "Republic of Albania",
+      "source_article": "Albania",
+      "proposed_entity": "Q222",
+      "decision": "corrected",
+      "reason": "Exact source label Republic of Albania and article Albania identify Q222, rather than the shared upstream Q467864. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385975854"
+    },
+    {
+      "source_entity": "Q5062192",
+      "source_name": "Mexico",
+      "source_article": "Mexico",
+      "proposed_entity": "Q96",
+      "decision": "corrected",
+      "reason": "Exact source label Mexico and article Mexico identify Q96, rather than the shared upstream Q5062192. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385499064"
+    },
+    {
+      "source_entity": "Q577867",
+      "source_name": "(Kingdom of Poland)",
+      "source_article": "Kingdom of Poland",
+      "proposed_entity": "Q8890160",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source spans 962–1449 and several political periods. The generic kingdom article does not resolve the chronology and entity scope of the source aggregate.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385637925"
+    },
+    {
+      "source_entity": "Q577867",
+      "source_name": "Kingdom of Poland",
+      "source_article": "Kingdom of Poland",
+      "proposed_entity": "Q8890160",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source spans 962–1449 and several political periods. The generic kingdom article does not establish the precise historical scope of this aggregate.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385637925"
+    },
+    {
+      "source_entity": "Q598570",
+      "source_name": "Ukraine",
+      "source_article": "Ukraine",
+      "proposed_entity": "Q212",
+      "decision": "corrected",
+      "reason": "Exact source label Ukraine and article Ukraine identify Q212, rather than the shared upstream Q598570. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385208337"
+    },
+    {
+      "source_entity": "Q6201794",
+      "source_name": "Jin",
+      "source_article": "Jin (Chinese state)",
+      "proposed_entity": "Q912043",
+      "decision": "corrected",
+      "reason": "Exact source label Jin and article Jin (Chinese state) identify Q912043, rather than the shared upstream Q6201794. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1355681775"
+    },
+    {
+      "source_entity": "Q66504140",
+      "source_name": "(Habsburg Monarchy)",
+      "source_article": "Habsburg monarchy",
+      "proposed_entity": "Q153136",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source is a broad dynastic/imperial aggregate including distant possessions. Distinct Habsburg entity definitions must be compared before selecting the general article identity.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1382195649"
+    },
+    {
+      "source_entity": "Q66504140",
+      "source_name": "Habsburg Monarchy",
+      "source_article": "Habsburg monarchy",
+      "proposed_entity": "Q153136",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source is a broad dynastic/imperial aggregate. Different geographical and dynastic meanings of Habsburg monarchy make the article insufficient for an automatic merge.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1382195649"
+    },
+    {
+      "source_entity": "Q71084",
+      "source_name": "First French colonial empire",
+      "source_article": "French colonial empire ",
+      "proposed_entity": "Q179023",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source covers 1805–1814 imperial/colonial components, while the article resolves to the broader French colonial empire. A component/aggregate decision needs more than the umbrella article.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385919924"
+    },
+    {
+      "source_entity": "Q7462",
+      "source_name": "Song",
+      "source_article": "Song (state)",
+      "proposed_entity": "Q1065073",
+      "decision": "corrected",
+      "reason": "Exact source label Song and article Song (state) identify Q1065073, rather than the shared upstream Q7462. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1359634784"
+    },
+    {
+      "source_entity": "Q783489",
+      "source_name": "Liang Dynasty",
+      "source_article": "Liang dynasty",
+      "proposed_entity": "Q1069868",
+      "decision": "corrected",
+      "reason": "Exact source label Liang Dynasty and article Liang dynasty identify Q1069868, rather than the shared upstream Q783489. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1375279227"
+    },
+    {
+      "source_entity": "Q80702",
+      "source_name": "(Spanish Empire)",
+      "source_article": "History of Spain (1808–1874)",
+      "proposed_entity": "Q16821150",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The article resolves to a historical period, History of Spain (1808–1874), not a polity. Keep the empire ID; the linked background article does not justify replacing it with a period ID.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385896191"
+    },
+    {
+      "source_entity": "Q80702",
+      "source_name": "Spanish Empire",
+      "source_article": "History of Spain (1808–1874)",
+      "proposed_entity": "Q16821150",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The article is a historical period, not a polity. Retain the empire ID rather than changing the source grouping to a history-topic identifier.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385896191"
+    },
+    {
+      "source_entity": "Q83286",
+      "source_name": "Yugoslavia",
+      "source_article": "Yugoslavia",
+      "proposed_entity": "Q36704",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The 1919–1945 source records precede the socialist federation, while the article covers Yugoslavia broadly. The exact kingdom, wartime claim and successor scopes need independent reconciliation.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384193048"
+    },
+    {
+      "source_entity": "Q918153",
+      "source_name": "Ceylon",
+      "source_article": "Sri Lanka",
+      "proposed_entity": "Q854",
+      "decision": "retained pending specific historical evidence",
+      "reason": "The source interval is 1236–1506; the Sri Lanka article is a geographical/modern-country reference. It does not identify which medieval kingdom or aggregate the source intends.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1385657451"
+    },
+    {
+      "source_entity": "Q974",
+      "source_name": "Republic of the Congo",
+      "source_article": "Republic of the Congo",
+      "proposed_entity": "Q971",
+      "decision": "corrected",
+      "reason": "Exact source label Republic of the Congo and article Republic of the Congo identify Q971, rather than the shared upstream Q974. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384752533"
+    },
+    {
+      "source_entity": "Q983",
+      "source_name": "Guinea",
+      "source_article": "Guinea",
+      "proposed_entity": "Q1006",
+      "decision": "corrected",
+      "reason": "Exact source label Guinea and article Guinea identify Q1006, rather than the shared upstream Q983. The source periods and geographical footprint were checked for this identity decision. Original source QID, dates and geometry are retained; this does not independently validate every source endpoint or border.",
+      "reference": "https://en.wikipedia.org/w/index.php?oldid=1384981775"
+    },
+    {
+      "source_entity": "Q1069868",
+      "source_name": "Southern Liang",
+      "source_article": "Liang dynasty",
+      "proposed_entity": "Q1330290",
+      "decision": "corrected",
+      "reason": "The source records Southern Liang in 397–414 with the ID and article for the separate Liang dynasty of 502–557. Independent dynasty chronologies distinguish these states. Correct the identity and further-reading link while preserving the original QID, article, dates and geometry.",
+      "review_reference": "https://courses.edx.org/asset-v1%3AHarvardX%2BSW12.8x%2B2016%2Btype%40asset%2Bblock/List_of_Dynasties.pdf"
+    }
+  ]
+}

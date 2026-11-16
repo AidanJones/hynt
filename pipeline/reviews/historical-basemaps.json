@@ -1,9 +1,9 @@
 {
   "revision": "4b5039e50d8d2464b065bd76ad6086cd4597108d",
-  "reviewed": "2026-11-15",
-  "status": "not imported",
+  "reviewed": "2026-11-16",
+  "status": "only the separately curated selection is imported",
   "upstream_licence_question": "https://github.com/aourednik/historical-basemaps/issues/74",
-  "decision": "Do not ship this candidate import yet. Review unresolved data-licence scope, feature-specific sources and anachronistic/mixed culture-language-taxonomic labels. Repository GPL listing alone is not a completed provenance review.",
+  "decision": "Selected contextualized archaeological records are packaged under the repository’s published GPL-3.0 terms with licence and corresponding source. The rest of these candidate snapshots remain excluded. The upstream licence-clarification issue is recorded, not treated as confirmation of a different licence. Numerical border precision is not historical confidence.",
   "snapshots": [
     {
       "year": -123000,
@@ -61,7 +61,7 @@
         "Steppe Mesolithic Hunter-Foragers"
       ],
       "has_feature_source_fields": 0,
-      "nonempty_weblinks": 0
+      "nonempty_weblinks": 3
     },
     {
       "year": -8000,
@@ -96,7 +96,7 @@
         "Steppe Mesolithic Hunter-Foragers"
       ],
       "has_feature_source_fields": 0,
-      "nonempty_weblinks": 0
+      "nonempty_weblinks": 3
     },
     {
       "year": -5000,
@@ -146,7 +146,7 @@
         "Volga-Kamm"
       ],
       "has_feature_source_fields": 0,
-      "nonempty_weblinks": 0
+      "nonempty_weblinks": 4
     },
     {
       "year": -4000,
@@ -190,7 +190,7 @@
         "city-states"
       ],
       "has_feature_source_fields": 0,
-      "nonempty_weblinks": 0
+      "nonempty_weblinks": 4
     }
   ]
 }

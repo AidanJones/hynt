@@ -18,7 +18,9 @@ with sync_playwright() as p:
     assert 'Reviewed identity correction' in page.locator('#details').inner_text() or 'REVIEWED IDENTITY CORRECTION' in page.locator('#details').inner_text()
     assert page.locator('#details a[href="https://www.wikidata.org/wiki/Q7209"]').count()>=1
     page.locator('#details .close').click()
-    page.locator('#search').fill('Roman Empire');page.locator('#search-results button').filter(has_text='Roman Empire').first.click()
+    page.locator('#year-input').fill('1920');page.locator('#year-input').press('Enter')
+    page.locator('#search').fill('British Empire');page.locator('#search-results button').filter(has_text='British Empire').first.click()
+    page.wait_for_function('document.querySelector("#details").textContent.includes("Multiple labels share this source identity")')
     page.wait_for_function('!window.atlas.map.isMoving()')
     assert 'multiple labels share this source identity' in page.locator('#details').inner_text().lower()
     assert page.locator('#details a[href*="review.html?entity="]').count()==1
@@ -26,7 +28,7 @@ with sync_playwright() as p:
     page.locator('#focus-filters>summary').click();page.locator('#draw-box').click();page.keyboard.press('Escape')
     assert page.locator('#draw-box').get_attribute('aria-pressed')=='false'
     page.locator('#year-slider').focus();page.keyboard.press('ArrowRight')
-    assert page.evaluate('window.atlas.state.year')==118
+    assert page.evaluate('window.atlas.state.year')==1921
     page.set_viewport_size({'width':390,'height':844})
     page.locator('#controls-toggle').click();assert page.locator('#map-controls').is_hidden()
     page.locator('#controls-toggle').click();assert page.locator('#map-controls').is_visible()

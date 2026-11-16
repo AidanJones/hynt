@@ -31,7 +31,7 @@
       <p>The polity source supplies no high/medium/low ratings. No confidence has been invented.</p>
     </details>
     <label for="region">Explore a region</label><select id="region"><option value="world">The whole world</option><option value="mediterranean">Mediterranean</option><option value="britain">British Isles</option><option value="asia">East Asia</option><option value="southasia">South Asia</option><option value="africa">Sub-Saharan Africa</option><option value="americas">The Americas</option></select>
-    <div class="section-title">MAP LAYERS <span>07 AVAILABLE</span></div>
+    <div class="section-title">MAP LAYERS <span>08 AVAILABLE</span></div>
     <label class="layer-row"><span><input id="polity-toggle" type="checkbox" checked> <span class="swatch"></span> Polities & empires</span><span class="live-dot" title="Available">●</span></label>
     <label class="opacity" for="opacity">Fill opacity<input id="opacity" type="range" min="10" max="90" value="58"></label>
     <label class="layer-row technology-toggle"><span><input id="migration-toggle" type="checkbox"> Migrations & early presence</span><span class="live-dot" title="Available">●</span></label>
@@ -77,7 +77,13 @@
       <button id="technology-fit" class="quiet">Fit recorded places to map ↗</button>
       <details class="technology-journey"><summary>Explore dated milestones</summary><div id="technology-trail"></div></details>
     </details>
-    <div class="future"><span>Peoples & cultures</span><small>Milestone 2</small></div>
+    <label class="layer-row technology-toggle"><span><input id="culture-toggle" type="checkbox"> Archaeological cultures</span><span class="live-dot" title="Available">●</span></label>
+    <details id="culture-explorer" class="evidence-explorer" hidden><summary>Selected culture reconstructions</summary>
+      <p>Partial source footprints, not ethnic, genetic or political borders. Snapshots are carried forward as a display assumption. Coverage is selected, not global.</p>
+      <label for="culture-kind">Archaeological tradition</label><select id="culture-kind"><option value="all">All selected traditions</option></select>
+      <button id="culture-tour" class="quiet">Explore the 5000 BCE snapshots ↗</button><div id="culture-count" role="status"></div>
+      <details><summary>Browse source snapshots</summary><div id="culture-list"></div></details>
+    </details>
     <label class="layer-row technology-toggle"><span><input id="event-toggle" type="checkbox"> Events & campaigns</span><span class="live-dot" title="Available">●</span></label>
     <details id="event-explorer" class="evidence-explorer" hidden>
       <summary>Explore events & cited successions</summary>
